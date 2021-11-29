@@ -18,7 +18,7 @@ const expressLayouts=require('express-ejs-layouts');
 const path = require("path");
 
 //page routings
-//
+const homeRoutes = require('./routes/home-routes');
 //
 //
 //
@@ -50,7 +50,7 @@ app.use(bodyParser.json());
 app.use(expressLayouts);
 
 //set page routings
-//
+app.use(homeRoutes.routes);
 //
 //
 

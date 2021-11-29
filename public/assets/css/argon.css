@@ -21397,7 +21397,8 @@ textarea[resize='horizontal']
 .navbar-vertical .navbar-brand > img
 {
     max-width: 100%;
-    max-height: 2rem;
+    max-height: 7rem;
+    margin-top: -22%;
 }
 @media (min-width: 768px)
 {
