@@ -1,0 +1,104 @@
+<body>
+    <%- include('partials/sidebar'); -%>
+    <div class="main-content">
+        <div class="header pb-6" style="background-color: orange;">
+            <div class="container-fluid">
+                <div class="header-body">
+                    <div class="row align-items-center py-4">
+                      <div class="col-lg-6 col-7">
+                        <h6 class="h2 text-white d-inline-block mb-0"><%= title %></h6>
+                        </div>
+                        <div class="col-lg-6 col-5 text-right">
+                            <a href="/admin/report/user" class="btn btn-sm btn-neutral">Generate Users Report</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <!-- Page content -->
+                <div class="container-fluid mt--6">
+                  <div class="row">
+                    <div class="col">
+                      <div class="card">
+                        <!-- Card header -->
+                        <div class="card-header border-0">
+                          <h3 class="mb-0">Users List</h3>
+                          <strong class="valid-feedback" style="display: block">
+                            <%= msg %>
+                        </strong>
+                        </div>
+                        <!-- Light table -->
+                        <div class="table-responsive">
+                          <table class="table align-items-center table-flush" style="min-height: 200px;">
+                            <thead class="thead-light">
+                              <tr>
+                                <th scope="col" class="sort" data-sort="name">Name</th>
+                                <th scope="col" class="sort" data-sort="budget">E-mail</th>
+                                <th scope="col" class="sort" data-sort="status">Contact No</th>
+                                <th scope="col" class="sort" data-sort="status">Position</th>
+                                <th scope="col" class="sort" data-sort="status">City</th>
+                                <th scope="col" class="sort" data-sort="completion">User Status</th>
+                                <!-- <th scope="col" class="sort" data-sort="completion">Create At</th> -->
+                                <th scope="col"></th>
+                              </tr>
+                            </thead>
+                            <tbody class="list">
+                              <% for(var i=0; i < users.length; i++) { %>  
+                              <tr>
+                                <th scope="row">
+                                  <div class="media align-items-center">
+                                    <a href="#" class="avatar rounded-circle mr-3">
+                                      <img alt="Image placeholder" src="../uploads/<%= users[i].image%>" style="height: 100%;width: 100%;">
+                                    </a>
+                                    <div class="media-body">
+                                      <span class="name mb-0 text-sm"><%= users[i].name %></span>
+                                    </div>
+                                  </div>
+                                </th>
+                                <td class="budget"><%= users[i].email %>
+                                </td>
+                                <td>
+                                  <span class="badge badge-dot mr-4">                      
+                                    <span class="status"><%= users[i].contact_no %></span>
+                                  </span>
+                                </td>
+                                <td>
+                                  <span class="badge badge-dot mr-4">                      
+                                    <span class="status"><%= users[i].position %></span>
+                                  </span>
+                                </td>
+                                <td>
+                                  <span class="badge badge-dot mr-4">                      
+                                    <span class="status"><%= users[i].city %></span>
+                                  </span>
+                                </td>
+                                <td>
+                                  <span class="badge badge-dot mr-4">                      
+                                    <span class="status"><%if(users[i].active==="yes"){ %>Active User<% } else {%>User Not Active<% }%></span>
+                                  </span>
+                                </td>
+                                <td class="text-right">
+                                  <div class="dropdown">
+                                    <a class="btn btn-sm btn-icon-only text-light" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                      <i class="fa fa-cog fa_custom fa-2x" style="size: 20px;color:#FF8546;"></i>
+                                    </a>
+                                    <div class="dropdown-menu dropdown-menu-right dropdown-menu-arrow">
+                                      <a class="dropdown-item" href="/admin/viewuser/<%= users[i].uid %>">View User</a>
+                                      <a class="dropdown-item" href="/admin/user/delete/<%= users[i].uid %>">Delete User</a>
+                                      <a class="dropdown-item" href="/admin/user/paymentList/<%= users[i].uid %>/<%= users[i].name %>">User Payment List</a>
+                                      <a class="dropdown-item" href="/admin/user/couponList/<%= users[i].uid %>/<%= users[i].name %>">User Coupon List</a>
+                                    </div>
+                                  </div>
+                                </td>
+                              </tr>
+                              <% } %>
+                            </tbody>
+                          </table>
+                        </div>
+                       </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <%- include('scripts'); -%>
+              </body>
