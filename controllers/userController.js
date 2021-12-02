@@ -150,5 +150,9 @@ const editUserProfile = async (req, res, next) => {
     })
 }
 
-
-
+module.exports = {
+    user_register,
+    getUserProfile,
+    editUserProfile,
+    
+}

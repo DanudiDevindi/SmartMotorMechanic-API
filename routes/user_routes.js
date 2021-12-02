@@ -22,6 +22,7 @@ const upload=multer({
     }
 });
 
+//admin user controller
 
 router.get('/admin/users',usersView);
 
@@ -35,29 +36,17 @@ router.get('/admin/user/paymentList/:uid/:name',userPaymentList);
 
 router.get('/admin/user/couponList/:uid/:name',userCouponList);
 
-router.post('/user-register',user_register);
-
 router.get('/admin/adminSignout',adminSignout)
 
-router.get('/reset/:email/:type',reset_password);
+//user controller
 
-router.post('/resetForgetPassword',ResetForgetPassword);
+router.post('/user-register',user_register);
 
 router.get('/user_details',checkAuth, getUserProfile);
 
 router.post('/edit_user',upload.any(),checkAuth,editUserProfile);
 
-router.post('/edit_password',checkAuth,editPassword);
 
-router.post('/user_login',login);
-
-router.get('/techDetails/:id',checkAuth,techDetails);
-
-router.put('/updateActive/:email',updateAccountActive);
-
-router.post  ('/send_email',checkAuth, send_email);
-
-router.get('/allUsersWithUserDetails',checkAuth,allUsersWithUserDetails)
 
 module.exports={
     routes:router

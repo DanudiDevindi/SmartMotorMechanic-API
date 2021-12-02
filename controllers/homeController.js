@@ -65,6 +65,7 @@ const adminLogin=(req,res,next)=>{
         }else{
             if(data.length>=1){
                 res.redirect('home');
+                
               
             }else{
                 res.render('login', {
