@@ -94,3 +94,61 @@ const getUserProfile = async (req, res, next) => {
     });
 }
 
+const editUserProfile = async (req, res, next) => {
+    console.log("with Image")
+    const obj = JSON.parse(req.body.date);
+    const objL = JSON.parse(req.body.location);
+    console.log(objL)
+    var userId = req.user_data.uid;
+    var latitude;
+    var longitude;
+    var address;
+    var city;
+
+    if (objL !== "") {
+        latitude = latitude = objL.region.latitude;
+        longitude = longitude = objL.region.longitude;
+        address = address = escape(objL.region.address);
+        var cityArray = address.split(',');
+        city = cityArray[cityArray.length - 2];
+    }
+
+    var sql;
+    if (objL !== "" && req.files.length > 0) {
+        console.log(1111)
+        sql = `update user_tbl set name='${obj.username}', contact_no='${obj.contact_no}',position='${obj.position}',
+        address='${address}',city='${city}',longitude='${longitude}',latitude='${latitude}',description='${obj.description}',
+        image='${req.files[0].originalname}' WHERE uid='${userId}'`;
+    } else if (objL === "" && req.files.length > 0) {
+        console.log(2222)
+        sql = `update user_tbl set name='${obj.username}', contact_no='${obj.contact_no}',position='${obj.position}',
+        description='${obj.description}',image='${req.files[0].originalname}' WHERE uid='${userId}'`;
+    } else if (objL !== "" && req.files.length <= 0) {
+        console.log(33333)
+        sql = `update user_tbl set name='${obj.username}', contact_no='${obj.contact_no}',position='${obj.position}',
+        address='${address}',city='${city}',longitude='${longitude}',latitude='${latitude}',description='${obj.description}'
+        WHERE uid='${userId}'`;
+    } else if (objL === "" && req.files.length <= 0) {
+        console.log(44444)
+        sql = `update user_tbl set name='${obj.username}', contact_no='${obj.contact_no}',position='${obj.position}',
+        description='${obj.description}' WHERE uid='${userId}'`;
+    }
+
+    mysqlConnection.query(sql, function (err, result) {
+        console.log(err)
+        if (err) {
+            res.send({
+                err: true,
+                message: "Server Error"
+            })
+        } else {
+            res.send({
+                err: false,
+                message: "Updated"
+            })
+        }
+    })
+}
+
+
+
