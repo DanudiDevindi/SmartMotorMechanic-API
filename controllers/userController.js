@@ -44,7 +44,7 @@ const user_register = (req, res, next) => {
     crypto.randomBytes(4,(err,buffer)=>{
         cord=buffer.toString("hex");
     })
-    
+
     var sql1 = `SELECT * FROM user_tbl WHERE email='${email}'`;
     mysqlConnection.query(sql1, (err, rows, fields) => {
         console.log("user_register2")
@@ -81,5 +81,16 @@ const user_register = (req, res, next) => {
         }
     });
 
+}
+
+const getUserProfile = async (req, res, next) => {
+    var userId = req.user_data.uid;
+    var sql = 'SELECT * FROM user_tbl where uid=' + userId;
+    mysqlConnection.query(sql, (err, rows, fields) => {
+        if (!err)
+            res.send(rows[0]);
+        else
+            console.log(JSON.stringify(err, undefined, 2))
+    });
 }
 
