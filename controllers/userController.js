@@ -96,7 +96,7 @@ const getUserProfile = async (req, res, next) => {
 
 const editUserProfile = async (req, res, next) => {
     console.log("with Image")
-    const obj = JSON.parse(req.body.date);
+    const obj = JSON.parse(req.body.data);
     const objL = JSON.parse(req.body.location);
     console.log(objL)
     var userId = req.user_data.uid;
@@ -293,11 +293,11 @@ const reset_password = async (req, res, next) => {
                         })
                     } else {
                         var transporter = nodemailer.createTransport({
-                            host: 'mail.findcrew.lk',
-                            port: 587,
+                            host: 'localhost',
+                            port: 3000,
                             auth: {
-                                user: 'noreply@findcrew.lk',
-                                pass: 'Dilanka@sanjaya1997'
+                                user: 'danudi.devindi@gmail.com',
+                                pass: 'danu.1997'
                             },
                             tls: {
                                 rejectUnauthorized: false
@@ -305,27 +305,12 @@ const reset_password = async (req, res, next) => {
                         });
                         var mailOptions;
                         mailOptions = {
-                            from: 'noreply@findcrew.lk',
+                            from: 'danudi.devindi@gmail.com',
                             to: email, // list of receivers
-                            subject: cord + ' is your Findcrew account recovery Code', // Subject line                            
-                            html: '<body><p> Hi ' + email + '</p><p>We received a request to reset your Findcrew password.<br>Enter the following password reset code<p><h1>' + cord + '</h1></body>'
+                            subject: cord + ' is your smart motor mechanic account recovery Code', // Subject line                            
+                            html: '<body><p> Hi ' + email + '</p><p>We received a request to reset your smart motor mechanic password.<br>Enter the following password reset code<p><h1>' + cord + '</h1></body>'
                         };
-                        // if(type==="forgot"){
-                        //     mailOptions = {
-                        //         from: 'degili@omicolombo.lk',
-                        //         to: email, // list of receivers
-                        //         subject: cord +' is your Dagili account recovery Code', // Subject line                            
-                        //         html:'<body><p> Hi '+email+'</p><p>We received a request to reset your Dagili password.<br>Enter the following password reset code<p><h1>'+cord+'</h1></body>'
-                        //     };
-                        // }else{
-                        //     mailOptions = {
-                        //         from: 'degili@omicolombo.lk', // sender address
-                        //         to: email, // list of receivers
-                        //         subject: cord +' is your Dagili App confirmation code', // Subject line                            
-                        //         html:'<body><p> Hi '+email+'</p><p>You recently registered for Dagili App. To complete your Dagili app registration, please confirm your account with below code.<p><h1>'+cord+'</h1></body>'
-                        //     };
-                        // }
-
+                        
 
                         transporter.sendMail(mailOptions, function (error, info) {
                             if (error) {
@@ -361,21 +346,21 @@ const send_email = (req, res, next) => {
     var data=req.body;
     console.log(data)
     var transporter = nodemailer.createTransport({
-        host: 'mail.findcrew.lk',
-        port: 25,
+        host: 'localhost',
+        port: 3000,
         auth: {
-            user: 'noreply@findcrew.lk',
-            pass: 'Dilanka@sanjaya1997'
+            user: 'danudi.devindi@gmail.com',
+            pass: 'danu.1997'
         },
         tls: {
             rejectUnauthorized: false
         }
     });
     var mailOptions = {
-        from: 'noreply@findcrew.lk', // sender address
+        from: 'danudi.devindi@gmail.com', // sender address
         to: data.email, // list of receivers
-        subject: data.cord + ' is your Findcrew App confirmation code', // Subject line                            
-        html: '<body><p> Hi ' + data.name + '</p><p>You recently registered for Findcrew App. To complete your Findcrew app registration, please confirm your account with below code.<p><h1>' + req.body.cord + '</h1></body>'
+        subject: data.cord + ' is your samrt motor mechanic App confirmation code', // Subject line                            
+        html: '<body><p> Hi ' + data.name + '</p><p>You recently registered for smart motor mechanic App. To complete your samrt motor mechanic app registration, please confirm your account with below code.<p><h1>' + req.body.cord + '</h1></body>'
     };
     transporter.sendMail(mailOptions, function (error, info) {
         console.log("user_register5")
