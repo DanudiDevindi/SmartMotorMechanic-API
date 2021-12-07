@@ -20,7 +20,7 @@ const path = require("path");
 //page routings
 const homeRoutes = require('./routes/home-routes');
 const userRoutes =require('./routes/user_routes');
-
+const categoryRoutes=require('./routes/category_route');
 //
 //
 const PORT = 3000;
@@ -53,6 +53,7 @@ app.use(expressLayouts);
 //set page routings
 app.use(homeRoutes.routes);
 app.use(userRoutes.routes);
+app.use(categoryRoutes.routes);
 
 //
 //
