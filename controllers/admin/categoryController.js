@@ -80,3 +80,25 @@ const delete_category = (req, res, next) => {
         res.redirect('/admin/categories');
     })
 }
+
+const viewCategory=(req,res,next)=>{
+    const id = req.params.id;
+    var sql = "SELECT * FROM category where cat_id=" + id;
+    mysqlConnection.query(sql, function (err1, result) {
+        console.log(result)
+        res.render('viewCategory', {
+            title: "View Category",
+            category: result[0],
+            err: '',
+            msg: ''
+        })
+    });
+}
+
+module.exports = {
+    categoryView,
+    addCatView,
+    addCategory,
+    delete_category,
+    viewCategory
+}
