@@ -20,3 +20,11 @@ const categoryView = (req, res, next) => {
     });
 
 }
+const addCatView = (req, res, next) => {
+    console.log("addCatView1")
+    res.render('addCategory', {
+        title: 'Add Category',
+        msg: '',
+        err: false
+    })
+}
