@@ -20,3 +20,14 @@ const upload=multer({
         filesize: 1024*1024*5
     }
 });
+
+//mobile app APIs
+const allCate=(req,res,next)=>{
+    var sql = "SELECT * FROM category"
+    mysqlConnection.query(sql, function (err1, result) { 
+        res.send(
+           result 
+        )
+    });
+}
+
