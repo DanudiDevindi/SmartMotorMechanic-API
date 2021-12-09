@@ -31,3 +31,19 @@ const allCate=(req,res,next)=>{
     });
 }
 
+const AllCategoryWithCount=(req,res,next)=>{
+    var sql="SELECT category,COUNT(cat_id) AS vehiCount FROM service where isApproved='yes' GROUP BY category ORDER BY COUNT(cat_id) DESC LIMIT 3"
+
+    mysqlConnection.query(sql, function (err1, result) { 
+        console.log(err1)
+        console.log(result)
+        res.send(
+            result
+        )
+    });
+}
+
+module.exports={
+    allCate,
+    AllCategoryWithCount
+}
