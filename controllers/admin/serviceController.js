@@ -51,8 +51,19 @@ const addServiceTypeView = (req, res, next) => {
     
     })
 }
+
+const allserviceView = (req, res, next) => {
+    var sql = "SELECT * FROM service"
+    mysqlConnection.query(sql, function (err1, result) {
+        res.render('services', {
+            title: "All Services",
+            services: result
+        })
+    });
+}
 module.exports = {
     addServiceView,
     addServiceTypeView,
+    allserviceView,
 
 }
