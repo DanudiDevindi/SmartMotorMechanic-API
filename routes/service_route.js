@@ -23,3 +23,12 @@ const upload=multer({
 // admin services
 
 router.get('/admin/addServiceView',addServiceView);
+
+
+//service type
+router.get('/admin/addServiceTypeView',addServiceTypeView);
+
+
+module.exports={
+    routes:router
+}

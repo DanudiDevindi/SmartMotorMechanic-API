@@ -42,9 +42,17 @@ const addServiceView = (req, res, next) => {
             categories: categories
         })
     }, 100);
-
+}
+const addServiceTypeView = (req, res, next) => {
+    res.render('addServiceType', {
+        title: 'Add Service Type',
+        msg: '',
+        err: false,
+    
+    })
 }
 module.exports = {
     addServiceView,
-    
+    addServiceTypeView,
+
 }
