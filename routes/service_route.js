@@ -28,6 +28,7 @@ router.get('/admin/services', allserviceView);
 
 //service type
 router.get('/admin/addServiceTypeView',addServiceTypeView);
+router.get('/admin/service_types',serviceTypesView);
 
 
 module.exports={

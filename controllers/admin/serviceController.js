@@ -61,9 +61,21 @@ const allserviceView = (req, res, next) => {
         })
     });
 }
+const serviceTypesView = (req, res, next) => {
+    var sql = "SELECT * FROM service_type"
+    mysqlConnection.query(sql, function (err1, result) {
+        res.render('service_types', {
+            title: "All Service Types",
+            service_types: result,
+            message:''
+            // message:req.flash('message')
+        })
+    });
+}
 module.exports = {
     addServiceView,
     addServiceTypeView,
     allserviceView,
+    serviceTypesView,
 
 }
