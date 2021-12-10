@@ -1,0 +1,77 @@
+<body>
+    <style>
+      .partialheader {
+        display: none;
+      }
+    </style>
+    <!-- Sidenav -->
+    <%- include('partials/sidebar'); -%>
+    <div class="main-content">
+    <div class="header pb-6" style="background-color: #25DCE8"></div>
+    <div class="container-fluid mt--5">
+    <!-- Form -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">Add Service Type</h3>
+                    </div>
+                    <form method="POST" action="/admin/addService_type">
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <select name="type" class="form-control" required>                                            
+                                            <option value="">- Choose Service Type -</option>
+                                            <option value="Rent">For Rent</option>
+                                            <option value="One day Service">For One day Service</option>
+                                            <option value="Sale">For Sale</option>
+                                            <option value="Hire">For Hire</option> 
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <select name="price_set_as" class="form-control" required>                                            
+                                            <option value="">- Choose How price set As -</option>
+                                            <option value="KM">per KM</option>
+                                            <option value="Year">per Year</option>
+                                            <option value="Month">per Month</option>
+                                            <option value="Day">per Day</option>                                            
+                                            <option value="Hour">per Hour</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- //check this div -->
+                            </div>
+                        </div>  
+                            
+                        <div class="row pl-5 pb-2">
+                            <div class="col-lg-5">
+                                <button type="submit" class="btn btn-primary">Add</button>
+                            </div>
+                        </div>
+                        <div class="row pl-5 pb-5">
+                            <% if (err) { %>
+                                <strong class="invalid-feedback" style="display: block">
+                                    <%= msg %>
+                                </strong>
+                            <% } else{%>
+                                <strong class="valid-feedback" style="display: block">
+                                    <%= msg %>
+                                </strong>
+                             <% }%>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<%- include('scripts'); -%>
+</body>
