@@ -21,7 +21,8 @@ const path = require("path");
 const homeRoutes = require('./routes/home-routes');
 const userRoutes =require('./routes/user_routes');
 const categoryRoutes=require('./routes/category_route');
-//
+const serviceRoutes=require('./routes/service_route');
+
 //
 const PORT = 3000;
 
@@ -54,6 +55,7 @@ app.use(expressLayouts);
 app.use(homeRoutes.routes);
 app.use(userRoutes.routes);
 app.use(categoryRoutes.routes);
+app.use(serviceRoutes.routes);
 
 //
 //
