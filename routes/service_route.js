@@ -19,3 +19,6 @@ const upload=multer({
         filesize: 1024*1024*5
     }
 });
+
+// admin services
+
