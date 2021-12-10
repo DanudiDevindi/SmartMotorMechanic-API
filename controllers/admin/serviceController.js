@@ -20,3 +20,31 @@ const upload = multer({
         filesize: 1024 * 1024 * 5
     }
 });
+
+const addServiceView = (req, res, next) => {
+    var users;
+    var categories;
+    var sql_user = "SELECT * FROM user_tbl";
+    mysqlConnection.query(sql_user, function (err1, result) {
+        users = result
+    });
+    var sql_cat = "SELECT * FROM category";
+    mysqlConnection.query(sql_cat, function (err1, result) {
+        categories = result
+    });
+
+    setTimeout(function () {
+        res.render('addService', {
+            title: 'Add Service',
+            msg: '',
+            err: false,
+            users: users,
+            categories: categories
+        })
+    }, 100);
+
+}
+module.exports = {
+    addServiceView,
+    
+}
