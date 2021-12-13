@@ -201,6 +201,33 @@ const serviceView = (req, res, next) => {
         })
     });
 }
+
+const deleteService = (req, res, next) => {
+    const service_id = req.params.service_id;
+    var sql = `DELETE FROM service WHERE service_id='${service_id}'`;
+    mysqlConnection.query(sql, function (err, result) {
+        if (err) throw err;
+        res.redirect('/admin/services');
+    })
+}
+const blockService = (req, res, next) => {
+    const service_id = req.params.service_id;
+    const status = req.params.status;
+    if (status) {
+        var sql = `update service set status='${0}' WHERE service_id='${service_id}'`;
+        mysqlConnection.query(sql, function (err, result) {
+            if (err) throw err;
+            res.send("Un Blocked");
+        })
+    } else {
+        var sql = `update service set status='${1}' WHERE service_id='${service_id}'`;
+        mysqlConnection.query(sql, function (err, result) {
+            if (err) throw err;
+            res.send("Blocked");
+        })
+    }
+
+}
 module.exports = {
     addServiceView,
     addServiceTypeView,
@@ -210,5 +237,8 @@ module.exports = {
     addServiceType,
     editService,
     serviceView,
+    deleteService,
+    blockService,
+
 
 }
