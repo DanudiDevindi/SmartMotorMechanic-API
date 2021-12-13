@@ -228,6 +228,91 @@ const blockService = (req, res, next) => {
     }
 
 }
+
+const approveService = (req, res, next) => {
+    const service_id = req.params.service_id;
+    var isApproved=req.params.approve;
+    console.log(isApproved)
+    var serviceA;
+    if (isApproved=== "yes") {
+        serviceA = "no"
+        message = "Blocked Service"
+    } else {
+        serviceA  = "yes"
+        message = "Approved Service"
+    }
+    var sql = "SELECT * FROM service where service_id=" + service_id
+    mysqlConnection.query(sql, function (err1, result) {
+        var sql = `update service set isApproved='${serviceA}' WHERE service_id='${service_id}'`;
+        mysqlConnection.query(sql, function (err, result1) {
+            if (err) {
+                res.render('viewService', {
+                    title: "View Service",
+                    service: result[0],
+                    err: true,
+                    msg: 'SerVer Error'
+                })
+            } else {
+                res.render('viewService', {
+                    title: "View Service",
+                    service: result[0],
+                    err: false,
+                    msg: "Update success"
+                })
+            }
+        })
+    })
+}
+const deleteServiceType = (req, res, next) => {
+    const service_type_id = req.params.service_type_id;
+    var sql = `DELETE FROM service_type WHERE service_type_id='${service_type_id}'`;
+    mysqlConnection.query(sql, function (err, result1) {
+        if (err) throw err;
+        // req.flash('message', 'Delete Successfully');
+        res.redirect('/admin/service_types');
+    })
+}
+const viewServiceType=(req,res,next)=>{
+    const id = req.params.id;
+    var sql = "SELECT * FROM service_type where service_type_id=" + id;
+    mysqlConnection.query(sql, function (err1, result) {
+        console.log(result)
+        res.render('viewServiceType', {
+            title: "View Service Type",
+            service_type: result[0],
+            msg: '',
+            err:true
+        })
+    });
+}
+const editServiceType=(req,res,next)=>{
+    console.log(req.params.id)
+    var sql = `SELECT * FROM service_type where service_type_id='${req.params.id}'`;
+    mysqlConnection.query(sql, function (err, result) {
+        console.log(333)
+
+        console.log(err)
+        var sql = `update service_type set price_set_as='${req.body.price_set_as}' WHERE service_type_id='${req.params.id}'`;
+        mysqlConnection.query(sql, function (err1, result1) {
+            if(err1){
+                res.render('viewServiceType', {
+                    title: "View Service Type",
+                    service_type: result[0],
+                    msg: 'Service Error..Try Again',
+                    err: true,
+                })
+            }else{
+                res.render('viewServiceType', {
+                    title: "View Service Type",
+                    service_type: result[0],
+                    msg: 'Update Sucessfully',
+                    err: false,
+                })
+            }
+        })
+    })    
+}
+
 module.exports = {
     addServiceView,
     addServiceTypeView,
@@ -239,6 +324,10 @@ module.exports = {
     serviceView,
     deleteService,
     blockService,
+    approveService,
+    deleteServiceType,
+    viewServiceType,
+    editServiceType,
 
 
 }
