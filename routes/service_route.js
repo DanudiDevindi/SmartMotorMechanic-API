@@ -22,16 +22,36 @@ const upload=multer({
 
 // admin services
 
-router.get('/admin/addServiceView',addServiceView);
 router.get('/admin/services', allserviceView);
+
+router.get('/admin/addServiceView',addServiceView);
+
 router.post('/admin/addService',upload.any(),addService);
+
+router.get('/admin/serviceView/:id',serviceView);
+
+router.get('/admin/serviceTypeView/:id',viewServiceType);
+
+router.post('/admin/editServiceType/:id',editServiceType)
+
+router.get('/admin/service/delete/:service_id',deleteService);
+
+router.get('/admin/service/block/:service_id/:status',blockService);
+
+router.get('/admin/service/approve/:service_id/:approve',approveService);
 
 
 //service type
-router.get('/admin/addServiceTypeView',addServiceTypeView);
 router.get('/admin/service_types',serviceTypesView);
+
+router.get('/admin/addServiceTypeView',addServiceTypeView);
+
 router.post('/admin/addService_type',addServiceType);
 
+router.get('/admin/service_type/delete/:service_type_id',deleteServiceType);
+
+
+// user services 
 
 module.exports={
     routes:router

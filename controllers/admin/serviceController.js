@@ -168,7 +168,39 @@ const addServiceType = (req, res, next) => {
         }
     })
 }
+const editService = async (req, res, next) => {
+    const obj = JSON.parse(req.body.data);
+    console.log(obj)
+    var sql = `update user_tbl set name='${obj.username}', contact_no='${obj.contact_no}',password='${obj.password}',
+    image='${req.files[0].originalname}' WHERE uid='${1}'`;
+    mysqlConnection.query(sql, function (err, result) {
+        if (err) {
+            res.send({
+                err: true,
+                message: "Server Error"
+            })
+        } else {
+            res.send({
+                err: false,
+                message: "Updated"
+            })
+        }
+    })
+}
 
+const serviceView = (req, res, next) => {
+    const id = req.params.id;
+    var sql = "SELECT * FROM service where service_id=" + id;
+    mysqlConnection.query(sql, function (err1, result) {
+        console.log(result)
+        res.render('viewService', {
+            title: "View Service",
+            service: result[0],
+            err: true,
+            msg: ''
+        })
+    });
+}
 module.exports = {
     addServiceView,
     addServiceTypeView,
@@ -176,5 +208,7 @@ module.exports = {
     serviceTypesView,
     addService,
     addServiceType,
+    editService,
+    serviceView,
 
 }
