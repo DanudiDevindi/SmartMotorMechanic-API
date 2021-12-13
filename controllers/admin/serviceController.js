@@ -130,6 +130,44 @@ const addService = (req, res, next) => {
         }
     });
 }
+const addServiceType = (req, res, next) => {
+    console.log("addServiceType1")
+    var type = req.body.type;
+    var price_set_as = req.body.price_set_as;
+    console.log("type " + type + " priceSet " + price_set_as)
+    // var sqlAll = `SELECT * FROM service_type WHERE type='${type}' and price_set_as='${price_set_as}'`;
+    var sqlAll = `SELECT * FROM service_type WHERE type='${type}'`;
+    mysqlConnection.query(sqlAll, function (err1, result) {
+        console.log("addServiceType2")
+        console.log(err1)
+        if (result.length >= 1) {
+            res.render('addServiceType', {
+                title: "Add Service Type",
+                err: true,
+                msg: "service type alredy exist. Please try new Service Type"
+            })
+        } else {
+            var sql = `INSERT INTO service_type(type,price_set_as,createAt) VALUES ('${type}','${price_set_as}',NOW())`;
+            mysqlConnection.query(sql, function (err, result) {
+                console.log("addServiceType3")
+                console.log(err)
+                if (err) {
+                    res.render('addServiceType', {
+                        title: "Add Service Type",
+                        err: true,
+                        msg: "Please try again"
+                    })
+                } else {
+                    res.render('addServiceType', {
+                        title: "Add Service Type",
+                        err: false,
+                        msg: "Added Service Type sucess"
+                    })
+                }
+            })
+        }
+    })
+}
 
 module.exports = {
     addServiceView,
@@ -137,5 +175,6 @@ module.exports = {
     allserviceView,
     serviceTypesView,
     addService,
+    addServiceType,
 
 }

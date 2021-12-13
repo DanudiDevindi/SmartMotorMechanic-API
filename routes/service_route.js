@@ -30,6 +30,7 @@ router.post('/admin/addService',upload.any(),addService);
 //service type
 router.get('/admin/addServiceTypeView',addServiceTypeView);
 router.get('/admin/service_types',serviceTypesView);
+router.post('/admin/addService_type',addServiceType);
 
 
 module.exports={
