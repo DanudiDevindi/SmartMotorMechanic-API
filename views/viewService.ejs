@@ -1,0 +1,140 @@
+<body>
+    <style>
+      .partialheader {
+        display: none;
+      }
+    </style>
+    <!-- Sidenav -->
+    <%- include('partials/sidebar'); -%>
+    <div class="main-content">
+    <div class="header pb-6" style="background-color: #25DCE8;"></div>
+    <div class="container-fluid mt--5">
+    <!-- Form -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">View Service's Details</h3>
+                    </div>
+                    <form> 
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative" style="width: 150px;height:150px;">
+                                        <img alt="Image placeholder" src="/../uploads/<%= service.image %>" style="height: 100%;width: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                             
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">User Name</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%= service.user_name %></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Vehicle Category</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%= service.category %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Service Type</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%= service.service_type %></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Price Set As per</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%= service.price_set_as %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pl-5">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Address</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%= service.address %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Price (Rs)</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%= service.price %>.00</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Approval Status</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%if(service.isApproved==="yes"){ %>Service Approved<% } else {%>Pending Approval<% }%>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pl-5">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Title</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%= service.title %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="row pl-5">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Description</span>
+                                    <div class="input-group input-group-alternative" style="height: 100px;">
+                                        <span class="form-control"><%= service.description %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pl-5">
+                            <div class="row pl-5 pb-2">
+                                <div class="col-lg-12">
+                                    <button class="btn btn-primary"><a href="/admin/service/approve/<%= service.service_id %>/<%= service.isApproved %>" style="color: white;">Approve/Block Service</a></button>
+                                   
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pl-7 pb-5">
+                            <% if (err) { %>
+                                <strong class="invalid-feedback" style="display: block">
+                                    <%= msg %>
+                                </strong>
+                            <% } else{%>
+                                <strong class="valid-feedback" style="display: block">
+                                    <%= msg %>
+                                </strong>
+                             <% }%>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<%- include('scripts'); -%>
+</body>
