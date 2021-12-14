@@ -7,40 +7,36 @@
     <!-- Sidenav -->
     <%- include('partials/sidebar'); -%>
     <div class="main-content">
-    <div class="header pb-6" style="background-color: #25DCE8"></div>
+    <div class="header pb-6" style="background-color:#25DCE8"></div>
     <div class="container-fluid mt--5">
     <!-- Form -->
         <div class="row">
             <div class="col">
                 <div class="card shadow">
                     <div class="card-header border-0">
-                        <h3 class="mb-0">Add Service Type</h3>
+                        <h3 class="mb-0">View Service Type</h3>
                     </div>
-                    <form method="POST" action="/admin/addService_type">
+                    <form method="POST" action="/admin/editServiceType/<%= service_type.service_type_id%>">
                         <div class="row pl-5">
                             <div class="col-lg-5">
-                                <div class="form-group">
-                                    <div class="input-group input-group-alternative">
-                                        <select name="type" class="form-control" required>                                            
-                                            <option value="">- Choose Service Type -</option>
-                                            <option value="Rent">For Rent</option>
-                                            <option value="One day Service">For One day Service</option>
-                                            <option value="Sale">For Sale</option>
-                                            <option value="Hire">For Hire</option> 
-                                        </select>
-                                    </div>
+                                    <div class="form-group">
+                                        <span class="status" style="margin-bottom: 18px;">Service Type</span>
+                                        <div class="input-group input-group-alternative">
+                                            <span class="form-control"><%= service_type.type%></span>
+                                        </div>
                                 </div>
                             </div>
                             <div class="col-lg-5">
                                 <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Service Price Set as</span>
                                     <div class="input-group input-group-alternative">
                                         <select name="price_set_as" class="form-control" required>                                            
-                                            <option value="">- Choose How price set As -</option>
-                                            <option value="KM">per KM</option>
-                                            <option value="Year">per Year</option>
-                                            <option value="Month">per Month</option>
-                                            <option value="Day">per Day</option>                                            
-                                            <option value="Hour">per Hour</option>
+                                            <option value="" disabled="disabled">- Choose How price set As -</option>
+                                            <option value="KM" <%= service_type.price_set_as === 'KM' ? 'selected': '' %>>per KM</option>
+                                            <option value="Year" <%= service_type.price_set_as === 'Year' ? 'selected': '' %>>per Year</option>
+                                            <option value="Month" <%= service_type.price_set_as === 'Month' ? 'selected': '' %>>per Month</option>
+                                            <option value="Day" <%= service_type.price_set_as === 'Day' ? 'selected': '' %>>per Day</option>                                            
+                                            <option value="Hour" <%= service_type.price_set_as === 'Hour' ? 'selected': '' %>>per Hour</option>
                                         </select>
                                     </div>
                                 </div>
@@ -51,7 +47,7 @@
                             
                         <div class="row pl-5 pb-2">
                             <div class="col-lg-5">
-                                <button type="submit" class="btn btn-primary" style="background-color: #25DCE8;">Add</button>
+                                <button type="submit" class="btn btn-primary">Edit</button>
                             </div>
                         </div>
                         <div class="row pl-5 pb-5">
