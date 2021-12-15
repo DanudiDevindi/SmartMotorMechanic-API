@@ -1,0 +1,122 @@
+<body>
+    <style>
+      .partialheader {
+        display: none;
+      }
+    </style>
+    <!-- Sidenav -->
+    <%- include('partials/sidebar'); -%>
+    <div class="main-content">
+    <div class="header pb-6" style="background-color: #25DCE8;"></div>
+    <div class="container-fluid mt--5">
+    <!-- Form -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">Add Service</h3>
+                    </div>
+                    <form method="POST" action="/admin/addService" enctype="multipart/form-data">
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">                                         
+                                        <select name="user" class="form-control" required>
+                                            <option value="">- Choose User -</option>
+                                            <% for(var i=0; i < users.length; i++) { %>  
+                                            <option value="<%= users[i].uid %>-<%= users[i].name %>"><%= users[i].name %></option>
+                                            <% } %>
+                                        </select>                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <select name="category" class="form-control" required>
+                                            <option value="">- Choose Category -</option>
+                                            <% for(var i=0; i < categories.length; i++) { %>  
+                                                <option value="<%= categories[i].cat_id %>-<%= categories[i].name %>"><%= categories[i].name %></option>
+                                            <% } %>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <input class="form-control" placeholder="Enter Title" type="text" name="title" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <input class="form-control" placeholder="Enter Description" type="text" name="description" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <select name="service_type" class="form-control" required>
+                                            <option value="">- Choose Service Type -</option> 
+                                            <option value="rent">For Rent</option>
+                                            <option value="sale">For Sale</option>
+                                            <option value="oneDayService">For one day service</option>
+                                            <option value="sell">For Sell</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <input class="form-control" placeholder="Enter Service Price" type="text" name="price" required>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <input type="file" id="myFile" name="image" placeholder="Image">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <!-- location catch -->
+                                        <!-- <input type="file" id="myFile" name="filename"> -->
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                        </div>  
+                            
+                        <div class="row pl-5 pb-2">
+                            <div class="col-lg-5">
+                                <button type="submit" class="btn btn-primary" style="background-color: #25DCE8;">Add</button>
+                            </div>
+                        </div>
+                        <div class="row pl-5 pb-5">
+                            <% if (err) { %>
+                                <strong class="invalid-feedback" style="display: block">
+                                    <%= msg %>
+                                </strong>
+                            <% } else{%>
+                                <strong class="valid-feedback" style="display: block">
+                                    <%= msg %>
+                                </strong>
+                             <% }%>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<%- include('scripts'); -%>
+</body>
