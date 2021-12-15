@@ -54,6 +54,8 @@ router.get('/admin/service_type/delete/:service_type_id',deleteServiceType);
 // user services 
 router.post('/createService',upload.any(),checkAuth,createService);
 
+router.get('/user_service',checkAuth,userServices);
+
 
 module.exports={
     routes:router

@@ -102,9 +102,18 @@ const createService=(req,res,next)=>{
     });        
 
 }
+const userServices=(req,res,next)=>{
+    var uid=req.user_data.uid;
+    var sql = "SELECT * FROM service where uid="+uid+" ORDER BY createAt DESC"
+    mysqlConnection.query(sql, function (err1, result) { 
+        res.send(
+            result
+        )
+    });   
+}
 
 module.exports={
     createService,
+    userServices,
     
-
 }
