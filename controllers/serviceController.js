@@ -182,6 +182,14 @@ const deleteUserService=async(req,res,next)=>{
         }        
     })
 }
+const allServices=(req,res,next)=>{
+    var sql = "SELECT * FROM service ORDER BY createAt DESC"
+    mysqlConnection.query(sql, function (err1, result) { 
+        res.send(
+            result
+        )
+    });   
+}
 
 
 
@@ -190,5 +198,6 @@ module.exports={
     userServices,
     editService,
     deleteUserService,
+    allServices,
     
 }

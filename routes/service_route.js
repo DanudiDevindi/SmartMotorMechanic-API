@@ -60,6 +60,7 @@ router.post('/edit_service',upload.any(),checkAuth,editService);
 
 router.get('/deleteUserService/:service_id',checkAuth,deleteUserService);
 
+router.get('/allServices',checkAuth,allServices);
 
 module.exports={
     routes:router
