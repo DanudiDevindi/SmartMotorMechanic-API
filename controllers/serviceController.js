@@ -191,6 +191,41 @@ const allServices=(req,res,next)=>{
     });   
 }
 
+const allServicesWithPagination=async(req,res,next)=>{
+    var pageno=req.params.page;
+    var vehicle=req.params.vehicle;
+    var limit = 20;
+    var offset = (pageno - 1) * limit;
+    var cities=[];
+    var isApproved='yes'
+    if(vehicle==="all"){
+        var sql=`SELECT u.uid,u.image as userImage,s.service_id,s.user_name,u.contact_no,s.category,s.title,s.description,s.service_type,s.price_set_as,s.price,s.image,s.image2,s.image3,s.longitude,s.latitude,s.address,s.city,s.createAt
+        FROM service as s
+        INNER JOIN user_tbl as u ON u.uid=s.uid where isApproved='${isApproved}' ORDER BY createAt DESC`
+        // var sql=`SELECT * FROM service where isApproved='${isApproved}' ORDER BY createAt DESC LIMIT '${limit}' OFFSET '${offset}'`
+    }else{
+        var sql=`SELECT s.user_name,u.contact_no,s.category,s.title,s.description,s.service_type,s.price_set_as,s.price,s.image,s.image2,s.image3,s.longitude,s.latitude,s.address,s.createAt
+        FROM service as s
+        INNER JOIN user_tbl as u ON u.uid=s.uid where category='${vehicle}' and isApproved='${isApproved}' ORDER BY createAt DESC`
+        // var sql = "SELECT * FROM service where category="+vehicle+" ORDER BY createAt DESC LIMIT " + limit + " OFFSET " + offset;
+    }
+    
+    mysqlConnection.query(sql, function (err1, result) {
+        result.forEach(async (element) => {            
+            if (!cities.includes(element.city)) {
+                await cities.push(element.city);
+            }
+       })
+            res.send({
+                services:result,
+                cities:cities,
+            }
+            )
+        // }, 100);                
+    });
+
+}
+
 
 
 module.exports={
@@ -199,5 +234,6 @@ module.exports={
     editService,
     deleteUserService,
     allServices,
+    allServicesWithPagination,
     
 }

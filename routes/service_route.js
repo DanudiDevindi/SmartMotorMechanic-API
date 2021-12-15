@@ -62,6 +62,8 @@ router.get('/deleteUserService/:service_id',checkAuth,deleteUserService);
 
 router.get('/allServices',checkAuth,allServices);
 
+router.get('/allServices/:vehicle/:page',checkAuth,allServicesWithPagination);
+
 module.exports={
     routes:router
 }
