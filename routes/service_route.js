@@ -2,7 +2,7 @@ const express =require('express');
 const checkAuth=require('../middleware/check_auth');
 const multer=require('multer');
 const {allserviceView,serviceTypesView,deleteService,blockService,approveService,addServiceView,addServiceType,addService,addServiceTypeView,deleteServiceType,serviceView,viewServiceType,editServiceType}=require("../controllers/admin/serviceController");
-// const {createService,editService,userServices,deleteUserService,allServices,allServicesWithPagination,allServicesWithFilter,allService_types,createServiceRate,getRateSummery,getServiceRate}=require("../controllers/serviceController");
+const {createService,editService,userServices,deleteUserService,allServices,allServicesWithPagination,allServicesWithFilter,allService_types,createServiceRate,getRateSummery,getServiceRate}=require("../controllers/serviceController");
 const router = express.Router();
 
 const storage=multer.diskStorage({
@@ -52,6 +52,8 @@ router.get('/admin/service_type/delete/:service_type_id',deleteServiceType);
 
 
 // user services 
+router.post('/createService',upload.any(),checkAuth,createService);
+
 
 module.exports={
     routes:router
