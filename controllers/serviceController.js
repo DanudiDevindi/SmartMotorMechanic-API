@@ -164,11 +164,31 @@ const editService=(req,res,next)=>{
         }
     })
 }
+const deleteUserService=async(req,res,next)=>{
+    const service_id=req.params.service_id;
+    var sql=`DELETE FROM service WHERE service_id='${service_id}'`;
+    mysqlConnection.query(sql, function (err, result) {
+        console.log(err)
+        if(err){
+            res.send({
+                err:true,
+                msg:err
+            });
+        }else{
+            res.send({
+                err:false,
+                msg:'Service Delete'
+            });
+        }        
+    })
+}
+
 
 
 module.exports={
     createService,
     userServices,
     editService,
+    deleteUserService,
     
 }

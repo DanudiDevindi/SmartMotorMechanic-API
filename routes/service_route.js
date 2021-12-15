@@ -58,6 +58,8 @@ router.get('/user_service',checkAuth,userServices);
 
 router.post('/edit_service',upload.any(),checkAuth,editService);
 
+router.get('/deleteUserService/:service_id',checkAuth,deleteUserService);
+
 
 module.exports={
     routes:router
