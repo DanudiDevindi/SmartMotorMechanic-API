@@ -56,6 +56,8 @@ router.post('/createService',upload.any(),checkAuth,createService);
 
 router.get('/user_service',checkAuth,userServices);
 
+router.post('/edit_service',upload.any(),checkAuth,editService);
+
 
 module.exports={
     routes:router

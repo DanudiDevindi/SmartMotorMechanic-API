@@ -111,9 +111,64 @@ const userServices=(req,res,next)=>{
         )
     });   
 }
+const editService=(req,res,next)=>{
+    const obj = JSON.parse(req.body.data);
+    const objL=JSON.parse(req.body.location);
+    var latitude;
+    var longitude;
+    var address;
+    var city;
+
+    if(objL!==""){        
+        latitude=latitude =objL.latitude;
+        longitude=longitude=objL.longitude;
+        address=address=escape(objL.address);
+        var cityArray=address.split(',');
+        city=cityArray[cityArray.length-2]; 
+    }
+    var sql;
+    if(objL==="" && req.files.length<=0){
+        console.log("No Image or location")
+        sql=`update service set cat_id='${obj.cat_id}', category='${obj.cat_name}',service_type='${obj.service_type}',
+    title='${escape(obj.title)}',description='${escape(obj.description)}' WHERE service_id='${obj.service_id}'`; 
+
+    }else if(objL==="" && req.files.length>0){
+        console.log("only image")
+        sql=`update service set cat_id='${obj.cat_id}', category='${obj.cat_name}',service_type='${obj.service_type}',
+    title='${escape(obj.title)}',description='${escape(obj.description)}',image='${req.files[0].originalname}' WHERE service_id='${obj.service_id}'`; 
+
+    }else if(objL!=="" && req.files.length<=0){
+        console.log("only location")
+        sql=`update service set cat_id='${obj.cat_id}', category='${obj.cat_name}',service_type='${obj.service_type}',
+        title='${escape(obj.title)}',description='${escape(obj.description)}',longitude='${objL.longitude}',
+        latitude='${obj.latitude}',address='${obj.address}' WHERE service_id='${obj.service_id}'`;     
+
+    }else if(objL!=="" && req.files.length>0){
+        console.log("both image and location")
+        sql=`update service set cat_id='${obj.cat_id}', category='${obj.cat_name}',service_type='${obj.service_type}',
+        title='${escape(obj.title)}',description='${escape(obj.description)}',longitude='${objL.longitude}',
+       latitude='${obj.latitude}',address='${obj.address}',image='${req.files[0].originalname}' WHERE service_id='${obj.service_id}'`; 
+
+    }
+    mysqlConnection.query(sql, function (err, result) {
+        if(err){
+            res.send({
+                err:true,
+                message:"Server Error"
+            }) 
+        }else{
+            res.send({
+                err:false,
+                message:"Updated"
+            })
+        }
+    })
+}
+
 
 module.exports={
     createService,
     userServices,
+    editService,
     
 }
