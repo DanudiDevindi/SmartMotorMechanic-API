@@ -70,6 +70,8 @@ router.get('/AllService_types',checkAuth,allService_types);
 
 router.post('/createServiceRate',checkAuth,createServiceRate);
 
+router.get('/getRateSummery/:service_id',checkAuth,getRateSummery);
+
 module.exports={
     routes:router
 }

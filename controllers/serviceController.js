@@ -305,6 +305,54 @@ const createServiceRate=(req,res,next)=>{
     })
    
 }
+const getRateSummery=(req,res,next)=>{
+    var sql = `SELECT * FROM service_feedback where service_id='${req.params.service_id}'` ;
+    mysqlConnection.query(sql, function (err, result) {
+        let rateSum=0,finalRate=0;
+        let rateSummery;
+        
+        let star5=0,star4=0,star3=0,star2=0,star1=0;
+        if(result.length>0){
+            for(var i=0;i<result.length;i++){
+                rateSum+=result[i].rate;
+                switch(result[i].rate){
+                    case 5:star5++;
+                        break;
+                    case 4:star4++;
+                        break;
+                    case 3:star3++;
+                        break;
+                    case 2:star2++;
+                        break;
+                    case 1:star1++;
+                        break;
+                    default:0
+                }
+            }
+            finalRate=rateSum/result.length
+         rateSummery={
+            finalRate:finalRate,
+            star5Perntage:star5*100/result.length+"%",
+            star4Perntage:star4*100/result.length+"%",
+            star3Perntage:star3*100/result.length+"%",
+            star2Perntage:star2*100/result.length+"%",
+            star1Perntage:star1*100/result.length+"%",
+        }
+            
+        }else{
+            rateSummery={
+                finalRate:0+"%",
+                star5Perntage:0+"%",
+                star4Perntage:0+"%",
+                star3Perntage:0+"%",
+                star2Perntage:0+"%",
+                star1Perntage:0+"%",
+            }
+        }
+        res.send(rateSummery)
+    })
+}
+
 
 module.exports={
     createService,
@@ -316,5 +364,6 @@ module.exports={
     allServicesWithFilter,
     allService_types,
     createServiceRate,
+    getRateSummery,
     
 }
