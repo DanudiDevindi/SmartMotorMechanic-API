@@ -270,7 +270,41 @@ const allService_types=(req,res,next)=>{
         )
     });
 }
-
+const createServiceRate=(req,res,next)=>{
+    console.log(req.user_data.uid)
+    console.log("service Id")
+    console.log(req.body.service_id)
+    var sql1=`SELECT * FROM service_feedback where service_id='${req.body.service_id}' and uid='${req.user_data.uid}'`;
+    mysqlConnection.query(sql1, function (err, result1) {
+        console.log("result1");
+        console.log(result1)
+        if(result1.length>0){
+            res.send({
+                err:true,
+                msg:"Already send feedback"
+            })            
+        }else{
+            var sql=`INSERT INTO service_feedback(uid,username,rate,comment,service_id,createAt) VALUES
+            ('${req.user_data.uid}','${req.user_data.name}','${req.body.rate}','${req.body.comment}','${req.body.service_id}',now())`;
+        
+            mysqlConnection.query(sql, function (err, result) {
+                console.log(err)
+                if(err){
+                    res.send({
+                        err:true,
+                        msg:"server Error"
+                    })
+                }else{
+                    res.send({
+                        err:false,
+                        msg:"Thank you for Rating"
+                    })
+                }
+            }) 
+        }
+    })
+   
+}
 
 module.exports={
     createService,
@@ -281,5 +315,6 @@ module.exports={
     allServicesWithPagination,
     allServicesWithFilter,
     allService_types,
+    createServiceRate,
     
 }
