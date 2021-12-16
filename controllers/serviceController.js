@@ -262,7 +262,14 @@ const allServicesWithFilter=(req,res,next)=>{
         )          
     });
 }
-
+const allService_types=(req,res,next)=>{
+    var sql = "SELECT * FROM service_type"
+    mysqlConnection.query(sql, function (err1, result) { 
+        res.send(
+           result 
+        )
+    });
+}
 
 
 module.exports={
@@ -273,5 +280,6 @@ module.exports={
     allServices,
     allServicesWithPagination,
     allServicesWithFilter,
+    allService_types,
     
 }
