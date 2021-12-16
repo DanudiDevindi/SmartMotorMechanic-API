@@ -353,6 +353,15 @@ const getRateSummery=(req,res,next)=>{
     })
 }
 
+const getServiceRate=(req,res,next)=>{
+    var sql = `SELECT * FROM service_feedback where service_id='${req.params.service_id}'` ;
+    mysqlConnection.query(sql, function (err, result) {
+        res.send(result)
+    })
+
+}
+
+
 
 module.exports={
     createService,
@@ -365,5 +374,6 @@ module.exports={
     allService_types,
     createServiceRate,
     getRateSummery,
+    getServiceRate,
     
 }
