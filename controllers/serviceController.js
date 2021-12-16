@@ -225,6 +225,43 @@ const allServicesWithPagination=async(req,res,next)=>{
     });
 
 }
+const allServicesWithFilter=(req,res,next)=>{
+    var filter=req.body.filter;
+    var pageno=req.body.page;   
+    var limit = 20;
+    var offset = (pageno - 1) * limit;
+    var sql;
+    var isApproved="yes"
+    if(filter.city==="" && filter.service==="" && filter.category===""){
+        sql = `SELECT * FROM service where isApproved='${isApproved}'`        
+    }else if(filter.city!=="" && filter.service!=="" && filter.category!==""){       
+        sql = `SELECT * FROM service WHERE service_type='${filter.service}' AND city='${filter.city}' AND category='${filter.category}' AND isApproved='${isApproved}'`
+    }else if(filter.city!=="" && filter.service!==""){
+        console.log(002)
+        sql = `SELECT * FROM service WHERE service_type='${filter.service}' AND city='${filter.city}'`
+    }else if(filter.service!=="" && filter.category!==""){
+        console.log(003)
+        sql = `SELECT * FROM service WHERE service_type='${filter.service}' AND category='${filter.category}' AND isApproved='${isApproved}'`
+    }else if(filter.city!=="" && filter.category!==""){
+        console.log(004)
+        sql = `SELECT * FROM service WHERE city='${filter.city}' AND category='${filter.category}' AND isApproved='${isApproved}'`
+    }else if(filter.city!==""){
+        console.log(005)
+        sql = `SELECT * FROM service WHERE city='${filter.city}'`
+    }else if(filter.service!==""){
+        console.log(006)
+        sql = `SELECT * FROM service WHERE service_type='${filter.service}' AND isApproved='${isApproved}'`
+    }else if(filter.category!==""){
+        console.log(007)
+        sql = `SELECT * FROM service WHERE category='${filter.category}' AND isApproved='${isApproved}'`
+    }
+    
+    mysqlConnection.query(sql, function (err1, result) { 
+        res.send(
+            result
+        )          
+    });
+}
 
 
 
@@ -235,5 +272,6 @@ module.exports={
     deleteUserService,
     allServices,
     allServicesWithPagination,
+    allServicesWithFilter,
     
 }

@@ -64,6 +64,8 @@ router.get('/allServices',checkAuth,allServices);
 
 router.get('/allServices/:vehicle/:page',checkAuth,allServicesWithPagination);
 
+router.post('/allServicesWithFilter',checkAuth,allServicesWithFilter);
+
 module.exports={
     routes:router
 }
