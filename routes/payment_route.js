@@ -24,3 +24,5 @@ const upload=multer({
 router.post('/admin/addPaymnetDuration',addPaymnetDuration);
 
 router.get('/admin/paymnetDuration', paymnetDurationView);
+
+router.get('/admin/addPaymnetDurationView',addPaymnetDurationView);
