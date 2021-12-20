@@ -78,9 +78,24 @@ const deletePaymnetDuration = (req, res, next) => {
     })
     
 }
+const viewPaymentDuration=(req,res,next)=>{
+    const id = req.params.id;
+    var sql = "SELECT * FROM payment where payment_id=" + id;
+    mysqlConnection.query(sql, function (err1, result) {
+        console.log(result)
+        res.render('viewPaymentDuration', {
+            title: "View Paymnet Duration",
+            payment: result[0],
+            msg: '',
+            err:true
+        })
+    });
+    
+}
 module.exports = {
     addPaymnetDuration,
     paymnetDurationView,
     addPaymnetDurationView,
     deletePaymnetDuration,
+    viewPaymentDuration,
 }
