@@ -32,3 +32,7 @@ router.get('/admin/paymnetDuration/delete/:id',deletePaymnetDuration);
 router.get('/admin/paymnetDurationView/:id',viewPaymentDuration);
 
 router.post('/admin/editPaymentDuration/:id',editPaymentDuration);
+
+//mobile api
+router.get('/getAmountAsDuration/:duration',checkAuth,getPaymnetDuration);
+
