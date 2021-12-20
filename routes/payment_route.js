@@ -36,3 +36,6 @@ router.post('/admin/editPaymentDuration/:id',editPaymentDuration);
 //mobile api
 router.get('/getAmountAsDuration/:duration',checkAuth,getPaymnetDuration);
 
+router.post('/createUserPayment',upload.any(),checkAuth,createUserPayment);
+
+
