@@ -26,3 +26,5 @@ router.post('/admin/addPaymnetDuration',addPaymnetDuration);
 router.get('/admin/paymnetDuration', paymnetDurationView);
 
 router.get('/admin/addPaymnetDurationView',addPaymnetDurationView);
+
+router.get('/admin/paymnetDuration/delete/:id',deletePaymnetDuration);

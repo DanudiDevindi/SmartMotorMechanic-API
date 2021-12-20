@@ -68,8 +68,19 @@ const addPaymnetDurationView = (req, res, next) => {
         })
     });
 }
+const deletePaymnetDuration = (req, res, next) => {
+    const id = req.params.id;
+    console.log(id)
+        var sql = `DELETE FROM payment WHERE payment_id='${id}'`;
+    mysqlConnection.query(sql, function (err, result) {
+        if(err) throw err;
+        res.redirect('/admin/paymnetDuration');
+    })
+    
+}
 module.exports = {
     addPaymnetDuration,
     paymnetDurationView,
     addPaymnetDurationView,
+    deletePaymnetDuration,
 }
