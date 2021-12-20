@@ -92,10 +92,37 @@ const viewPaymentDuration=(req,res,next)=>{
     });
     
 }
+const editPaymentDuration=(req,res,next)=>{
+    console.log(req.params.id)
+    var sql = `SELECT * FROM payment where payment_id='${req.params.id}'`;
+    mysqlConnection.query(sql, function (err, result) {
+        var sql = `update payment set amount='${req.body.amount}' WHERE payment_id='${req.params.id}'`;
+        mysqlConnection.query(sql, function (err1, result1) {
+            if(err1){
+                res.render('viewPaymentDuration', {
+                    title: "View Paymnet Duration",
+                    payment: result[0],
+                    msg: 'Service Error..Try Again',
+                    err: true,
+                })
+            }else{
+                res.render('viewPaymentDuration', {
+                    title: "View Paymnet Duration",
+                    payment: result[0],
+                    msg: 'Update Sucessfully',
+                    err: false,
+                })
+            }
+        })
+    })    
+
+}
+
 module.exports = {
     addPaymnetDuration,
     paymnetDurationView,
     addPaymnetDurationView,
     deletePaymnetDuration,
     viewPaymentDuration,
+    editPaymentDuration
 }
