@@ -38,7 +38,23 @@ const addPaymnetDuration = (req, res, next) => {
     })
 
 }
+const paymnetDurationView = (req, res, next) => {
+    console.log("oaymentDurationView1")
+    var sql = "SELECT * FROM payment"
+    mysqlConnection.query(sql, function (err1, result) {
+        console.log("oaymentDurationView2")
+        console.log(err1)
+        console.log(result)
+        res.render('payments', {
+            title: "All Payment Duration",
+            paymnets: result,
+            message:''
+            
+        })
+    });
+}
 
 module.exports = {
     addPaymnetDuration,
+    paymnetDurationView,
 }
