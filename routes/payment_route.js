@@ -38,4 +38,7 @@ router.get('/getAmountAsDuration/:duration',checkAuth,getPaymnetDuration);
 
 router.post('/createUserPayment',upload.any(),checkAuth,createUserPayment);
 
+router.get('/paypal',getPayPal);
+
+router.get('/test',checkAuth,testing);
 
