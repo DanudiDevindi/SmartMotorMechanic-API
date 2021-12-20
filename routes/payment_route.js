@@ -42,3 +42,6 @@ router.get('/paypal',getPayPal);
 
 router.get('/test',checkAuth,testing);
 
+module.exports={
+    routes:router
+}

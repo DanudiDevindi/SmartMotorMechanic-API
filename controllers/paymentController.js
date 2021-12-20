@@ -109,10 +109,45 @@ const getPayPal=(req,res,next)=>{
 const testing=(req,res,next)=>{
     res.render("testing");
 }
+const sucess=(req,res,next)=>{
+    var PayerID = req.query.PayerID;
+    var paymentId = req.query.paymentId;
+    var execute_payment_json = {
+        payer_id: PayerID,
+        transactions: [
+            {
+                amount: {
+                    currency: "USD",
+                    total: "1.00"
+                }
+            }
+        ]
+    };
+
+    paypal.payment.execute(paymentId, execute_payment_json, function(
+        error,
+        payment
+    ) {
+        if (error) {
+            console.log(error.response);
+            throw error;
+        } else {
+            console.log("Get Payment Response");
+            console.log(JSON.stringify(payment));
+            res.render("success");
+        }
+    });
+}
+
+const cancel=(req,res,next)=>{
+    res.render("cancel");
+}
 module.exports = {
     getPaymnetDuration,
     createUserPayment,
     testing,
     getPayPal,
+    sucess,
+    cancel,
 
 }
