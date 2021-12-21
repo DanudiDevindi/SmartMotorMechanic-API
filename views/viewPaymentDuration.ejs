@@ -1,0 +1,64 @@
+<body>
+    <style>
+      .partialheader {
+        display: none;
+      }
+    </style>
+    <!-- Sidenav -->
+    <%- include('partials/sidebar'); -%>
+    <div class="main-content">
+    <div class="header pb-6" style="background-color: #25DCE8;"></div>
+    <div class="container-fluid mt--5">
+    <!-- Form -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">Add Payment Duration</h3>
+                    </div>
+                    <form method="POST" action="/admin/editPaymentDuration/<%= payment.payment_id%>">
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">No Of Months</span>
+                                    <div class="input-group input-group-alternative">                                         
+                                        <span class="form-control"><%= payment.no_of_months %></span>                                     
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Amount</span>
+                                    <div class="input-group input-group-alternative">
+                                        <input class="form-control" placeholder="Enter Amount" type="text" name="amount" required value=<%= payment.amount %>>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                            
+                        <div class="row pl-5 pb-2">
+                            <div class="col-lg-5">
+                                <button type="submit" class="btn btn-primary" style="background-color: #25DCE8;">Edit</button>
+                            </div>
+                        </div>
+                        <div class="row pl-5 pb-5">
+                            <% if (err) { %>
+                                <strong class="invalid-feedback" style="display: block">
+                                    <%= msg %>
+                                </strong>
+                            <% } else{%>
+                                <strong class="valid-feedback" style="display: block">
+                                    <%= msg %>
+                                </strong>
+                             <% }%>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<%- include('scripts'); -%>
+</body>

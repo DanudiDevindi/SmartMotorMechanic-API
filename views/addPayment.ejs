@@ -1,0 +1,70 @@
+<body>
+    <style>
+      .partialheader {
+        display: none;
+      }
+    </style>
+    <!-- Sidenav -->
+    <%- include('partials/sidebar'); -%>
+    <div class="main-content">
+    <div class="header pb-6" style="background-color: #25DCE8;"></div>
+    <div class="container-fluid mt--5">
+    <!-- Form -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">Add Payment Duration</h3>
+                    </div>
+                    <form method="POST" action="/admin/addPaymnetDuration">
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Payment Duration</span>
+                                    <div class="input-group input-group-alternative">                                         
+                                        <select name="no_of_months"class="form-control" required>
+                                            <option value="">- Choose Payment Duration -</option>  
+                                            <option value="1">1 Month</option>
+                                            <option value="3">3 Months</option>
+                                            <option value="6">6 Months</option>
+                                            <option value="12">12 Months</option>
+                                        </select>                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Payment Amount (Rs)</span>
+                                    <div class="input-group input-group-alternative">
+                                        <input class="form-control" placeholder="Enter Amount" type="number" name="amount" required min="0">
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                            
+                        <div class="row pl-5 pb-2">
+                            <div class="col-lg-5">
+                                <button type="submit" class="btn btn-primary" style="background-color: #25DCE8;">Add</button>
+                            </div>
+                        </div>
+                        <div class="row pl-5 pb-5">
+                            <% if (err) { %>
+                                <strong class="invalid-feedback" style="display: block">
+                                    <%= msg %>
+                                </strong>
+                            <% } else{%>
+                                <strong class="valid-feedback" style="display: block">
+                                    <%= msg %>
+                                </strong>
+                             <% }%>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<%- include('scripts'); -%>
+</body>
