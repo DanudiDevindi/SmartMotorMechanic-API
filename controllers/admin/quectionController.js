@@ -132,10 +132,20 @@ const blockQuection =(req,res,next)=>{
     
 }
 
+const approveQuection =(req,res,next)=>{
+    const service_id=req.params.service_id;
+    var sql=`update service set isApproved='${true}' WHERE service_id='${service_id}'`;
+    mysqlConnection.query(sql, function (err, result) {
+        if(err) throw err;
+        res.send("Aproved");
+    })
+}
+
 module.exports={
     allquectionView,
     addQuectionView,
     addQuection,
     deleteQuection,
     blockQuection,
+    approveQuection,
 }

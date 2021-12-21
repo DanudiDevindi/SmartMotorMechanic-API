@@ -30,6 +30,8 @@ router.get('/admin/quection/delete/:qid',deleteQuection);
 
 router.get('/admin/quection/block/:qid/:status',blockQuection);
 
+router.get('/admin/quection/approve/:qid',approveQuection);
+
 module.exports={
     routes:router
 }
