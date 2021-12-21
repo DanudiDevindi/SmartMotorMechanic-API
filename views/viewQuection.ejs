@@ -1,0 +1,85 @@
+<body>
+    <style>
+      .partialheader {
+        display: none;
+      }
+    </style>
+    <!-- Sidenav -->
+    <%- include('partials/sidebar'); -%>
+    <div class="main-content">
+    <div class="header pb-6" style="background-color: #25DCE8;"></div>
+    <div class="container-fluid mt--5">
+    <!-- Form -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">View Quection's Details</h3>
+                    </div>
+                    <form>   
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative" style="width: 150px;height:150px;">
+                                        <img alt="Image placeholder" src="/../uploads/<%= quection.image %>" style="height: 100%;width: 100%;">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                                         
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">User Name</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%= quection.user_name %></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Vehicle Category</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%= quection.category %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pl-5">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Address</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%= quection.address %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div> 
+                        <div class="row pl-5">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Title</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%= quection.title %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>  
+                        <div class="row pl-5">
+                            <div class="col-lg-10">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Description</span>
+                                    <div class="input-group input-group-alternative" style="height: 100px;">
+                                        <span class="form-control"><%= quection.quection %></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<%- include('scripts'); -%>
+</body>
