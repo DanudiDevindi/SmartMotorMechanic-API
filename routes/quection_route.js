@@ -34,6 +34,8 @@ router.get('/admin/quection/approve/:qid',approveQuection);
 
 router.get('/admin/quectionView/:id',quectionView);
 
+router.get('/admin/answersView/:qid/:title',answeredView);
+
 module.exports={
     routes:router
 }

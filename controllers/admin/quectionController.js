@@ -155,6 +155,22 @@ const quectionView=(req,res,next)=>{
     });
 }
 
+const answeredView=(req,res,next)=>{
+    var qid=req.params.qid;
+    var sql = "SELECT answer,name FROM answer,user_tbl where qid=" + qid;
+    mysqlConnection.query(sql, function (err1, result) {
+        console.log(err1)
+        console.log(result)
+        res.render('answersList', {
+            title: "View "+req.params.title+" Answer List",
+            answers: result,
+            err: '',
+            msg: '',
+        })
+    });
+}
+
+
 module.exports={
     allquectionView,
     addQuectionView,
@@ -163,4 +179,5 @@ module.exports={
     blockQuection,
     approveQuection,
     quectionView,
+    answeredView,
 }
