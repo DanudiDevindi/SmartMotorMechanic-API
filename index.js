@@ -23,6 +23,7 @@ const userRoutes =require('./routes/user_routes');
 const categoryRoutes=require('./routes/category_route');
 const serviceRoutes=require('./routes/service_route');
 const paymnetRouter=require('./routes/payment_route');
+const quectionRoute=require('./routes/quection_route');
 
 //
 const PORT = 3000;
@@ -58,6 +59,8 @@ app.use(userRoutes.routes);
 app.use(categoryRoutes.routes);
 app.use(serviceRoutes.routes);
 app.use(paymnetRouter.routes);
+app.use(quectionRoute.routes);
+
 
 //
 //
