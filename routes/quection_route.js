@@ -24,6 +24,8 @@ router.get('/admin/quections', allquectionView);
 
 router.get('/admin/addQuectionView',addQuectionView);
 
+router.post('/admin/addQuection',upload.any(),addQuection);
+
 module.exports={
     routes:router
 }
