@@ -104,9 +104,38 @@ const addQuection=(req,res,next)=>{
         }
     });      
 }
+const deleteQuection =(req,res,next)=>{
+    const id=req.params.qid;
+    var sql=`DELETE FROM quection WHERE qid='${id}'`;
+    mysqlConnection.query(sql, function (err, result) {
+        if (err) throw err;
+        res.redirect('/admin/quections');
+    })
+}
+
+const blockQuection =(req,res,next)=>{
+    const service_id=req.params.service_id;
+    const status=req.params.status;
+    if(status){
+        var sql=`update service set status='${0}' WHERE service_id='${service_id}'`;
+        mysqlConnection.query(sql, function (err, result) {
+        if(err) throw err;
+        res.send("Un Blocked");
+    })
+    }else{
+        var sql=`update service set status='${1}' WHERE service_id='${service_id}'`;
+        mysqlConnection.query(sql, function (err, result) {
+        if(err) throw err;
+        res.send("Blocked");
+    })
+    }
+    
+}
 
 module.exports={
     allquectionView,
     addQuectionView,
     addQuection,
+    deleteQuection,
+    blockQuection,
 }

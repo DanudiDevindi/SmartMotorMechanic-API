@@ -26,6 +26,10 @@ router.get('/admin/addQuectionView',addQuectionView);
 
 router.post('/admin/addQuection',upload.any(),addQuection);
 
+router.get('/admin/quection/delete/:qid',deleteQuection);
+
+router.get('/admin/quection/block/:qid/:status',blockQuection);
+
 module.exports={
     routes:router
 }
