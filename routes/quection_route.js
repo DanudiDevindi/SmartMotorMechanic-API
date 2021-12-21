@@ -32,6 +32,8 @@ router.get('/admin/quection/block/:qid/:status',blockQuection);
 
 router.get('/admin/quection/approve/:qid',approveQuection);
 
+router.get('/admin/quectionView/:id',quectionView);
+
 module.exports={
     routes:router
 }

@@ -141,6 +141,20 @@ const approveQuection =(req,res,next)=>{
     })
 }
 
+const quectionView=(req,res,next)=>{
+    const id = req.params.id;
+    var sql = "SELECT * FROM quection where qid=" + id;
+    mysqlConnection.query(sql, function (err1, result) {
+        console.log(result)
+        res.render('viewQuection', {
+            title: "View Quection",
+            quection: result[0],
+            err: '',
+            msg: ''
+        })
+    });
+}
+
 module.exports={
     allquectionView,
     addQuectionView,
@@ -148,4 +162,5 @@ module.exports={
     deleteQuection,
     blockQuection,
     approveQuection,
+    quectionView,
 }
