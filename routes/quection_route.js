@@ -22,6 +22,8 @@ const upload=multer({
 
 router.get('/admin/quections', allquectionView);
 
+router.get('/admin/addQuectionView',addQuectionView);
+
 module.exports={
     routes:router
 }

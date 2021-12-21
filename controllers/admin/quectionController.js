@@ -28,6 +28,30 @@ const allquectionView =(req,res,next)=>{
         })
     });
 }
+
+const addQuectionView=(req,res,next)=>{
+    var users;
+    var categories;
+    var sql_user = "SELECT * FROM user_tbl";
+    mysqlConnection.query(sql_user, function (err1, result) { 
+        users=result
+    });
+    var sql_cat = "SELECT * FROM category";
+    mysqlConnection.query(sql_cat, function (err1, result) {
+        categories=result
+    });
+
+    setTimeout(function () {
+        res.render('addQuection',{
+            title:'addQuection',
+            msg:'',
+            err:false,
+            users:users,
+            categories:categories
+        })
+    }, 100);    
+}
 module.exports={
     allquectionView,
+    addQuectionView,
 }
