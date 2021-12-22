@@ -41,6 +41,8 @@ router.post('/createQuection',upload.any(),checkAuth,createQuection);
 
 router.get('/allQuections',checkAuth,allQuections);
 
+router.get('/allAnswers/:qid',checkAuth,allAnswers);
+
 module.exports={
     routes:router
 }

@@ -102,9 +102,17 @@ const allQuections = async (req, res, next) => {
     });
 
 }
+const allAnswers = (req, res, next) => {
+    var sql = "SELECT * FROM answer where qid=" + req.params.qid;
+    mysqlConnection.query(sql, function (err1, result) {
+       return res.status(200).json(result);
+    });
+
+}
 
 module.exports = {
     createQuection,
     time_calculate,
     allQuections,
+    allAnswers,
 }
