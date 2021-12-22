@@ -198,6 +198,26 @@ const edit_post = (req, res, next) => {
     })
 }
 
+const deleteUserPost=(req,res,next)=>{
+    console.log(req.params.qid)
+    var sql=`DELETE FROM quection WHERE qid='${req.params.qid}'`;
+    mysqlConnection.query(sql, function (err, result) {
+        console.log(err)
+        if(err){
+            res.send({
+                err:true,
+                msg:err
+            });
+        }else{
+            res.send({
+                err:false,
+                msg:'Quection Delete'
+            });
+        }        
+    })
+}
+
+
 module.exports = {
     createQuection,
     time_calculate,
@@ -206,4 +226,5 @@ module.exports = {
     addAnswer,
     user_posts,
     edit_post,
+    deleteUserPost
 }

@@ -49,6 +49,8 @@ router.get('/user_posts',checkAuth,user_posts);
 
 router.post('/edit_post',upload.any(),checkAuth,edit_post);
 
+router.get('/deleteUserPost/:qid',checkAuth,deleteUserPost);
+
 module.exports={
     routes:router
 }
