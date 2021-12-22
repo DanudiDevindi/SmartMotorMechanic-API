@@ -39,6 +39,8 @@ router.get('/admin/answersView/:qid/:title',answeredView);
 
 router.post('/createQuection',upload.any(),checkAuth,createQuection);
 
+router.get('/allQuections',checkAuth,allQuections);
+
 module.exports={
     routes:router
 }
