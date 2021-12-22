@@ -43,6 +43,10 @@ router.get('/allQuections',checkAuth,allQuections);
 
 router.get('/allAnswers/:qid',checkAuth,allAnswers);
 
+router.post('/addAnswer',checkAuth,addAnswer);
+
+router.get('/user_posts',checkAuth,user_posts);
+
 module.exports={
     routes:router
 }

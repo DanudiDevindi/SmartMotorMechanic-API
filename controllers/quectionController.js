@@ -109,10 +109,51 @@ const allAnswers = (req, res, next) => {
     });
 
 }
+const addAnswer = (req, res, next) => {
+    var answer = escape(req.body.answer);
+    var qid = req.body.qid;
+    var uid = req.user_data.uid;
+    var name = req.user_data.name;
+
+    var sql = `INSERT INTO answer(qid,answer,uid,user_name,status,createAt) VALUES
+    ('${qid}','${answer}','${uid}','${name}','${false}',now())`;
+
+    mysqlConnection.query(sql, function (err, result) {
+        if (err) {
+            res.send({
+                err: true,
+                msg: err
+            })
+        } else {
+            res.send({
+                err: false,
+                message: "Answer Added",
+                answerdetails: {
+                    qid: qid,
+                    answer: answer,
+                    uid: uid,
+                    name: name
+                }
+            });
+        }
+    })
+}
+
+const user_posts = (req, res, next) => {
+    var uid = req.user_data.uid;
+    var sql = "SELECT * FROM quection where uid=" + uid+" ORDER BY createAt DESC"
+    mysqlConnection.query(sql, function (err1, result) {
+        res.send(
+            result
+        )
+    });
+}
 
 module.exports = {
     createQuection,
     time_calculate,
     allQuections,
     allAnswers,
+    addAnswer,
+    user_posts,
 }
