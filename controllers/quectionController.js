@@ -149,6 +149,55 @@ const user_posts = (req, res, next) => {
     });
 }
 
+const edit_post = (req, res, next) => {
+    console.log("edit post")
+    const obj = JSON.parse(req.body.data);
+    // console.log(obj)
+    const objL = JSON.parse(req.body.location);
+    console.log("ObjL")
+    
+    if(objL==="" && req.files.length<=0){
+        console.log("No Image or location")
+        sql = `update quection set cat_id='${obj.cat_id}', category='${obj.cat_name}',title='${escape(obj.title)}',
+    quection='${escape(obj.quection)}' WHERE qid='${obj.qid}'`;
+
+    }else if(objL==="" && req.files.length>0){
+        console.log("only image")
+        sql = `update quection set cat_id='${obj.cat_id}', category='${obj.cat_name}',title='${escape(obj.title)}',
+    quection='${escape(obj.quection)}',image='${escape(req.files[0].originalname)}' WHERE qid='${obj.qid}'`;
+
+    }else if(objL!=="" && req.files.length<=0){
+        console.log("only location")
+        sql = `update quection set cat_id='${obj.cat_id}', category='${obj.cat_name}',title='${escape(obj.title)}',
+    quection='${escape(obj.quection)}',longitude='${objL.longitude}',
+    latitude='${objL.latitude}', address='${objL.address}' WHERE qid='${obj.qid}'`;
+
+    }else if(objL!=="" && req.files.length>0){
+        console.log("both image and location")
+        console.log(objL)
+        sql = `update quection set cat_id='${obj.cat_id}', category='${obj.cat_name}',title='${escape(obj.title)}',
+    quection='${escape(obj.quection)}',image='${escape(req.files[0].originalname)}',longitude='${objL.longitude}',
+    latitude='${objL.latitude}', address='${objL.address}' WHERE qid='${obj.qid}'`;
+
+    }
+
+    
+    mysqlConnection.query(sql, function (err, result) {
+        console.log(err)
+        if (err) {
+            res.send({
+                err: true,
+                message: "Server Error"
+            })
+        } else {
+            res.send({
+                err: false,
+                message: "Updated"
+            })
+        }
+    })
+}
+
 module.exports = {
     createQuection,
     time_calculate,
@@ -156,4 +205,5 @@ module.exports = {
     allAnswers,
     addAnswer,
     user_posts,
+    edit_post,
 }

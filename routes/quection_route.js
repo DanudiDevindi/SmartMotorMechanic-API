@@ -47,6 +47,8 @@ router.post('/addAnswer',checkAuth,addAnswer);
 
 router.get('/user_posts',checkAuth,user_posts);
 
+router.post('/edit_post',upload.any(),checkAuth,edit_post);
+
 module.exports={
     routes:router
 }
