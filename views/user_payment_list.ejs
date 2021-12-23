@@ -1,0 +1,86 @@
+<body>
+    <!-- <style>
+      .partialheader {
+        display: none;
+      }
+    </style> -->
+    <!-- Sidenav -->
+    <%- include('partials/sidebar'); -%>
+    <div class="main-content">
+  <div class="header pb-6" style="background-color: #25DCE8;">
+      <div class="container-fluid">
+        <div class="header-body">
+          <div class="row align-items-center py-4">
+            <div class="col-lg-6 col-7">
+              
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Page content -->
+    <div class="container-fluid mt--6">
+      <div class="row">
+        <div class="col">
+          <div class="card">
+            <div class="card-header border-0">
+                <h3 class="mb-0"><%= title %></h3>
+              </div>
+            <div class="table-responsive">
+              <table class="table align-items-center table-flush" style="min-height: 200px;">
+                <thead class="thead-light">
+                  <tr>
+                    <th scope="col" class="sort" data-sort="budget">Amount(Rs)</th>
+                    <th scope="col" class="sort" data-sort="status">Payment Method</th>
+                    <th scope="col" class="sort" data-sort="status">Payment Paid from</th>
+                    <th scope="col" class="sort" data-sort="status">Payment Paid to</th>
+                    <th scope="col" class="sort" data-sort="status">Paymnet Status</th>
+                    <th scope="col" class="sort" data-sort="status">Payment Period Expired/Not</th>
+                    <th scope="col"></th>
+                  </tr>
+                </thead>
+                <tbody class="list">
+                    <% for(var i=0; i < userPayments.length; i++) { %>  
+                    <tr>
+                      <td>
+                        <span class="badge badge-dot mr-4">                      
+                          <span class="status"><%= userPayments[i].paid_amount %>.00</span>
+                        </span>
+                      </td>
+                      <td>
+                        <span class="badge badge-dot mr-4">                      
+                          <span class="status"><%= userPayments[i].payment_method %></span>
+                        </span>
+                      </td>
+                      <td>
+                        <span class="badge badge-dot mr-4">                      
+                          <span class="status"><%= userPayments[i].paidFrom.toLocaleDateString() %></span>
+                        </span>
+                      </td>
+                      <td>
+                          <span class="badge badge-dot mr-4">                      
+                            <span class="status"><%= userPayments[i].paidTo.toLocaleDateString() %></span>
+                          </span>
+                        </td>
+                        <td>
+                          <span class="badge badge-dot mr-4">                      
+                            <span class="status"><%if(userPayments[i].isPaid==="yes"){ %>User Paid<% } else {%>User Not Paid<% }%></span>
+                          </span>
+                        </td>
+                        <td>
+                            <span class="badge badge-dot mr-4">                      
+                              <span class="status"><%if(userPayments[i].isExpired==="yes"){ %>Payment Expired<% } else {%>Not expired<% }%></span>
+                            </span>
+                          </td>
+                    </tr>
+                    <% } %>
+                  </tbody>
+              </table>
+            </div>
+           </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%- include('scripts'); -%>
+  </body>
