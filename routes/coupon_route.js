@@ -6,6 +6,8 @@ const checkAuth=require('../middleware/check_auth');
 
 router.post('/admin/addCoupon',addCoupon);
 
+router.get('/admin/coupons', couponsView);
+
 
 module.exports={
     routes:router

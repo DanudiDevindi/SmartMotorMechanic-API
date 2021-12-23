@@ -54,6 +54,24 @@ const addCoupon = (req, res, next) => {
 
 }
 
+const couponsView = (req, res, next) => {
+    console.log("couponView1")
+    var sql = "SELECT * from coupon"
+    mysqlConnection.query(sql, function (err1, result) {
+        console.log("couponView2")
+        console.log(err1)
+        console.log(result)
+        // res.render('login', { message : req.flash('msg') });
+        res.render('coupons', {
+            title: "All Coupons",
+            coupons: result,
+            message:''
+            // message:req.flash('message')
+        })
+    });
+}
+
 module.exports = {
     addCoupon,
+    couponsView,
 }
