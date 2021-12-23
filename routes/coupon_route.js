@@ -10,6 +10,8 @@ router.get('/admin/coupons', couponsView);
 
 router.get('/admin/addCouponView',addCouponView);
 
+router.get('/admin/coupon/delete/:id',deleteCoupon);
+
 
 module.exports={
     routes:router

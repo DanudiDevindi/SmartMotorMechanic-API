@@ -86,8 +86,18 @@ const addCouponView = (req, res, next) => {
     });
 }
 
+const deleteCoupon = (req, res, next) => {
+    const coupon_id = req.params.id;
+    var sql = `DELETE FROM coupon WHERE coupon_id='${coupon_id}'`;
+    mysqlConnection.query(sql, function (err, result1) {
+        // req.flash('message', 'Delete Successfully');
+        res.redirect('/admin/coupons');
+    })    
+}
+
 module.exports = {
     addCoupon,
     couponsView,
     addCouponView,
+    deleteCoupon,
 }
