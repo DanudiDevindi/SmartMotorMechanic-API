@@ -12,7 +12,12 @@ router.get('/admin/addCouponView',addCouponView);
 
 router.get('/admin/coupon/delete/:id',deleteCoupon);
 
-router.get('/admin/couponView/:id',viewCoupon)
+router.get('/admin/couponView/:id',viewCoupon);
+
+router.post('/admin/editCoupon/:id',editCoupon);
+
+router.get('/getCoupon/:cord',checkAuth,getCoupon);
+
 
 
 module.exports={

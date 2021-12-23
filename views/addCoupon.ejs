@@ -1,0 +1,129 @@
+<body>
+    <style>
+        .partialheader {
+            display: none;
+        }
+    </style>
+    <!-- Sidenav -->
+    <%- include('partials/sidebar'); -%>
+        <div class="main-content">
+            <div class="header pb-6" style="background-color: #25DCE8;"></div>
+            <div class="container-fluid mt--5">
+                <!-- Form -->
+                <div class="row">
+                    <div class="col">
+                        <div class="card shadow">
+                            <div class="card-header border-0">
+                                <h3 class="mb-0">Add Coupon</h3>
+                            </div>
+                            <form method="POST" action="/admin/addCoupon">
+                                <div class="row pl-5">
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <span class="status" style="margin-bottom: 18px;">Vehicle Category</span>
+                                            <div class="input-group input-group-alternative">
+                                                <select name="category" class="form-control" required>
+                                                    <option value="">- Choose Vehicle Category -</option>
+                                                    <% for(var i=0; i < categories.length; i++) { %>
+                                                        <option value="<%= categories[i].cat_id %>">
+                                                            <%=categories[i].name%>
+                                                        </option>
+                                                        <% } %>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <span class="status" style="margin-bottom: 18px;">Coupon Code</span>
+                                            <div class="input-group input-group-alternative">
+                                                <input class="form-control" placeholder="Enter Code" type="text"
+                                                    name="cord" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pl-5">
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <span class="status" style="margin-bottom: 18px;">Discount Type</span>
+                                            <div class="input-group input-group-alternative">
+                                                <select name="discount_type" class="form-control" required
+                                                    onchange="checkType(event)">
+                                                    <option value="">- Choose Discount Type -</option>
+                                                    <option value="percentage">As Percentage</option>
+                                                    <option value="amount">As Amount</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <span class="status" style="margin-bottom: 18px;" id="spanAmount">Discount
+                                                Amount</span>
+                                            <div class="input-group input-group-alternative">
+                                                <input class="form-control" placeholder="Discount Amount" name="amount" type="number" min="1" id="disAmountID">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row pl-5">
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-alternative">
+                                                <Text style="margin-right: 30px;">From</Text>
+                                                <input type="date" id="fromDate" name="fromDate" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-5">
+                                        <div class="form-group">
+                                            <div class="input-group input-group-alternative">
+                                                <Text style="margin-right: 30px;">To</Text>
+                                                <input type="date" id="toDate" name="toDate" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row pl-5 pb-2">
+                                    <div class="col-lg-5">
+                                        <button type="submit" class="btn btn-primary" style="background-color: #25DCE8;">Add</button>
+                                    </div>
+                                </div>
+                                <div class="row pl-5 pb-5">
+                                    <% if (err) { %>
+                                        <p id="demo"></p>
+                                        <strong class="invalid-feedback" style="display: block">
+                                            <%= msg %>
+                                        </strong>
+                                        <% } else{%>
+                                            <strong class="valid-feedback" style="display: block">
+                                                <%= msg %>
+                                            </strong>
+                                            <% }%>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <%- include('scripts'); -%>
+</body>
+<script>
+    function checkType(evt) {
+        var discountAmount=document.getElementById("disAmountID");        
+        var span = document.getElementById("spanAmount");
+        if (evt.target.value === "percentage") {
+            span.textContent = "Discount Amount (%)";
+            discountAmount.max=100
+        } else {
+            span.textContent = "Discount Amount (Rs)";
+            discountAmount.max=1000000
+        }
+    }
+</script>

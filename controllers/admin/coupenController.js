@@ -111,10 +111,37 @@ const viewCoupon=(req,res,next)=>{
     });
 }
 
+const editCoupon=(req,res,next)=>{
+    console.log(req.params.id)
+    var sql = `SELECT * FROM coupon where coupon_id='${req.params.id}'`;
+    mysqlConnection.query(sql, function (err, result) {
+        var sql = `update coupon set discount_type='${req.body.discount_type}',discount='${req.body.amount}',fromDate='${req.body.fromDate}',toDate='${req.body.toDate}' WHERE coupon_id='${req.params.id}'`;
+        mysqlConnection.query(sql, function (err1, result1) {
+            console.log(err1)
+            if(err1){
+                res.render('viewCoupon', {
+                    title: "View Coupon",
+                    coupon: result[0],
+                    msg: 'Service Error..Try Again',
+                    err: true,
+                })
+            }else{
+                res.render('viewCoupon', {
+                    title: "View Coupon",
+                    coupon: result[0],
+                    msg: 'Update Sucessfully',
+                    err: false,
+                })
+            }
+        })
+    })    
+}
+
 module.exports = {
     addCoupon,
     couponsView,
     addCouponView,
     deleteCoupon,
     viewCoupon,
+    editCoupon,
 }
