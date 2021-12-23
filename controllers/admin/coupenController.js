@@ -95,9 +95,26 @@ const deleteCoupon = (req, res, next) => {
     })    
 }
 
+const viewCoupon=(req,res,next)=>{
+    console.log(44444)
+   
+    const id = req.params.id;
+    var sql = "SELECT * FROM coupon where coupon_id=" + id;
+    mysqlConnection.query(sql, function (err1, result) {
+        console.log(result)
+        res.render('viewCoupon', {
+            title: "View Coupon",
+            coupon: result[0],
+            err: '',
+            msg: ''
+        })
+    });
+}
+
 module.exports = {
     addCoupon,
     couponsView,
     addCouponView,
     deleteCoupon,
+    viewCoupon,
 }

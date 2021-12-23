@@ -12,6 +12,8 @@ router.get('/admin/addCouponView',addCouponView);
 
 router.get('/admin/coupon/delete/:id',deleteCoupon);
 
+router.get('/admin/couponView/:id',viewCoupon)
+
 
 module.exports={
     routes:router
