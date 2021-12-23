@@ -71,7 +71,23 @@ const couponsView = (req, res, next) => {
     });
 }
 
+const addCouponView = (req, res, next) => {
+    console.log("addCouponView1")
+    var sql_cat = "SELECT * FROM category";
+    mysqlConnection.query(sql_cat, function (err1, result) {
+        console.log("addCouponView2")
+        console.log(err1)
+        res.render('addCoupon', {
+            title: 'Add Coupon',
+            msg: '',
+            err: false,
+            categories: result
+        })
+    });
+}
+
 module.exports = {
     addCoupon,
     couponsView,
+    addCouponView,
 }

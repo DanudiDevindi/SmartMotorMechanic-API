@@ -8,6 +8,8 @@ router.post('/admin/addCoupon',addCoupon);
 
 router.get('/admin/coupons', couponsView);
 
+router.get('/admin/addCouponView',addCouponView);
+
 
 module.exports={
     routes:router
