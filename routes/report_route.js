@@ -11,6 +11,8 @@ router.get('/admin/report/service', serviceReport);
 
 router.get('/admin/report/quection', quectionReport);
 
+router.get('/admin/reports',reportView);
+
 module.exports={
     routes:router
 }

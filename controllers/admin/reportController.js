@@ -100,10 +100,17 @@ const quectionReport=(req,res,next)=>{
     });
 
 }
+
+const reportView=(req,res,next)=>{
+    res.render('report',{
+        title:"All Reports",
+    })
+}
 module.exports={
     usersReport,
     categoriesReport,
     serviceReport,
     quectionReport,
-    
+    reportView,
+
 }
