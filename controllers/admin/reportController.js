@@ -48,7 +48,35 @@ const categoriesReport=(req,res,next)=>{
         }) 
     });
 }
+const serviceReport=(req,res,next)=>{
+    let workbook = new excel.Workbook();
+    var sql = "SELECT * FROM service"
+    mysqlConnection.query(sql, function (err1, result) { 
+        // let workbook = new excel.Workbook();        
+	    let workSheet = workbook.addWorksheet('Services'); 
+
+        workSheet.columns = [
+            { header: 'Id', key: 'service_id', width: 10},
+            { header: 'User Nme', key: 'user_name', width: 20 },
+            { header: 'Category', key: 'category', width: 20},
+            { header: 'Title', key: 'title', width: 20, outlineLevel: 1},
+            { header: 'Description', key: 'description', width: 40, outlineLevel: 1},
+            { header: 'Service Type', key: 'service_type', width: 10, outlineLevel: 1},
+            { header: 'Price', key: 'price', width: 20, outlineLevel: 1}
+        ];
+        // Add Array Rows
+        workSheet.addRows(result); 
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', 'attachment; filename=' + 'services.xlsx');
+        
+        return workbook.xlsx.write(res).then(function() {
+            res.status(200).end();
+        })
+    });
+
+}
 module.exports={
     usersReport,
     categoriesReport,
+    serviceReport,
 }
