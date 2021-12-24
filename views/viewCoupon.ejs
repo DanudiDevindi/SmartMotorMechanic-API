@@ -1,0 +1,104 @@
+<body>
+    <style>
+      .partialheader {
+        display: none;
+      }
+    </style>
+    <!-- Sidenav -->
+    <%- include('partials/sidebar'); -%>
+    <div class="main-content">
+    <div class="header pb-6" style="background-color: #25DCE8;"></div>
+    <div class="container-fluid mt--5">
+    <!-- Form -->
+        <div class="row">
+            <div class="col">
+                <div class="card shadow">
+                    <div class="card-header border-0">
+                        <h3 class="mb-0">Edit Coupon</h3>
+                    </div>
+                    <form method="POST" action="/admin/editCoupon/<%= coupon.coupon_id %>">
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Veicle Category</span>
+                                    <div class="input-group input-group-alternative">                                         
+                                        <span class="form-control"><%= coupon.cat_id %></span>                                      
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Coupon Code</span>
+                                    <div class="input-group input-group-alternative">
+                                        <span class="form-control"><%= coupon.cord %></span> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>                      
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Discount Type</span> 
+                                    <div class="input-group input-group-alternative">                                                                               
+                                        <select name="discount_type" class="form-control" required>
+                                            <option value="">- Choose Discount Type -</option>
+                                            <option value="percentage" <%= coupon.discount_type === 'percentage' ? 'selected': '' %>>As Percentage</option>
+                                            <option value="amount" <%= coupon.discount_type === 'amount' ? 'selected': '' %>>As Amount</option>
+                                        </select>                                       
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <span class="status" style="margin-bottom: 18px;">Discount Amount</span> 
+                                    <div class="input-group input-group-alternative">
+                                        <input class="form-control" placeholder="Discount Amount" type="text" name="amount" required value=<%= coupon.discount %>>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pl-5">
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <Text style="margin-right: 30px;">From</Text>
+                                        <input type="date" id="fromDate" name="fromDate" required value=<%= coupon.fromDate %>>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-5">
+                                <div class="form-group">
+                                    <div class="input-group input-group-alternative">
+                                        <Text style="margin-right: 30px;">To</Text>
+                                        <input type="date" id="toDate" name="toDate" required value=<%= coupon.toDate %>>
+                                    </div>                                    
+                                </div>
+                            </div>
+                        </div>
+                            
+                        <div class="row pl-5 pb-2">
+                            <div class="col-lg-5">
+                                <button type="submit" class="btn btn-primary" style="background-color: #25DCE8;">Edit</button>
+                            </div>
+                        </div>
+                        <div class="row pl-5 pb-5">
+                            <% if (err) { %>
+                                <strong class="invalid-feedback" style="display: block">
+                                    <%= msg %>
+                                </strong>
+                            <% } else{%>
+                                <strong class="valid-feedback" style="display: block">
+                                    <%= msg %>
+                                </strong>
+                             <% }%>
+                        </div>
+                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+<%- include('scripts'); -%>
+</body>
