@@ -5,6 +5,8 @@ const router = express.Router();
 
 router.get('/admin/report/user', usersReport);
 
+router.get('/admin/report/category', categoriesReport);
+
 module.exports={
     routes:router
 }

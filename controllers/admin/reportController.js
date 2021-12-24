@@ -30,6 +30,25 @@ const usersReport=(req,res,next)=>{
     });     
 }
 
+const categoriesReport=(req,res,next)=>{
+    let workbook = new excel.Workbook();
+    var sql = "SELECT * FROM category"
+    mysqlConnection.query(sql, function (err1, result) { 
+	    let worksheet = workbook.addWorksheet('Category');
+        worksheet.columns = [
+            { header: 'Id', key: 'cat_id', width: 10},
+            { header: 'Name', key: 'name', width: 20 }
+        ];
+        worksheet.addRows(result);
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', 'attachment; filename=' + 'categories.xlsx');
+        
+        return workbook.xlsx.write(res).then(function() {
+            res.status(200).end();
+        }) 
+    });
+}
 module.exports={
     usersReport,
+    categoriesReport,
 }
