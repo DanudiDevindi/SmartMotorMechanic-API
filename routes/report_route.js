@@ -9,6 +9,8 @@ router.get('/admin/report/category', categoriesReport);
 
 router.get('/admin/report/service', serviceReport);
 
+router.get('/admin/report/quection', quectionReport);
+
 module.exports={
     routes:router
 }

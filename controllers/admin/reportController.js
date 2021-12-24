@@ -75,8 +75,35 @@ const serviceReport=(req,res,next)=>{
     });
 
 }
+const quectionReport=(req,res,next)=>{
+    let workbook = new excel.Workbook();
+    var sql = "SELECT * FROM quection"
+    mysqlConnection.query(sql, function (err1, result) { 
+        // let workbook = new excel.Workbook();        
+	    let workSheet = workbook.addWorksheet('Quections'); 
+
+        workSheet.columns = [
+            { header: 'Id', key: 'qid', width: 10},
+            { header: 'User Name', key: 'user_name', width: 20 },
+            { header: 'Category', key: 'category', width: 30},
+            { header: 'Title', key: 'title', width: 20, outlineLevel: 1},
+            { header: 'Quection', key: 'quection', width: 40, outlineLevel: 1}
+        ];
+        // Add Array Rows
+        workSheet.addRows(result); 
+        res.setHeader('Content-Type', 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        res.setHeader('Content-Disposition', 'attachment; filename=' + 'quections.xlsx');
+        
+        return workbook.xlsx.write(res).then(function() {
+            res.status(200).end();
+        })
+    });
+
+}
 module.exports={
     usersReport,
     categoriesReport,
     serviceReport,
+    quectionReport,
+    
 }
