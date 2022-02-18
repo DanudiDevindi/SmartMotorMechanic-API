@@ -37,19 +37,19 @@ router.get('/admin/quectionView/:id',quectionView);
 router.get('/admin/answersView/:qid/:title',answeredView);
 
 
-router.post('/createQuection',upload.any(),checkAuth,createQuection);
+router.post('/createQuection',upload.any(),createQuection);
 
-router.get('/allQuections',checkAuth,allQuections);
+router.get('/allQuections',allQuections);
 
-router.get('/allAnswers/:qid',checkAuth,allAnswers);
+router.get('/allAnswers/:qid',allAnswers);
 
-router.post('/addAnswer',checkAuth,addAnswer);
+router.post('/addAnswer',addAnswer);
 
-router.get('/user_posts',checkAuth,user_posts);
+router.get('/user_posts',user_posts);
 
-router.post('/edit_post',upload.any(),checkAuth,edit_post);
+router.post('/edit_post',upload.any(),edit_post);
 
-router.get('/deleteUserPost/:qid',checkAuth,deleteUserPost);
+router.get('/deleteUserPost/:qid',deleteUserPost);
 
 module.exports={
     routes:router

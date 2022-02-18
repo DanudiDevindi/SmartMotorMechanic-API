@@ -42,21 +42,21 @@ router.get('/reset/:email/:type',reset_password);
 
 router.post('/resetForgetPassword',ResetForgetPassword);
 
-router.get('/user_details',checkAuth, getUserProfile);
+router.get('/user_details',getUserProfile);
 
-router.post('/edit_user',upload.any(),checkAuth,editUserProfile);
+router.post('/edit_user',upload.any(),editUserProfile);
 
-router.post('/edit_password',checkAuth,editPassword);
+router.post('/edit_password',editPassword);
 
 router.post('/user_login',login);
 
-router.get('/techDetails/:id',checkAuth,techDetails);
+router.get('/techDetails/:id',techDetails);
 
 router.put('/updateActive/:email',updateAccountActive);
 
-router.post  ('/send_email',checkAuth, send_email);
+router.post  ('/send_email',send_email);
 
-router.get('/allUsersWithUserDetails',checkAuth,allUsersWithUserDetails)
+router.get('/allUsersWithUserDetails',allUsersWithUserDetails)
 
 
 module.exports={

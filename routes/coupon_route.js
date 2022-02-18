@@ -16,7 +16,7 @@ router.get('/admin/couponView/:id',viewCoupon);
 
 router.post('/admin/editCoupon/:id',editCoupon);
 
-router.get('/getCoupon/:cord',checkAuth,getCoupon);
+router.get('/getCoupon/:cord',getCoupon);
 
 
 

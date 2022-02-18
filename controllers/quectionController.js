@@ -84,7 +84,6 @@ const time_calculate = (firstTime) => {
 const allQuections = async (req, res, next) => {
     console.log(852)
     var postData = [];
-    // var sql="SELECT * FROM quection LEFT JOIN answer ON answer.qid=quection.qid ORDER BY quection.createAt DESC"
     var sql = "SELECT q.qid,u.name,u.contact_no,q.category,q.title,q.quection,q.longitude,q.latitude,q.address,q.image,q.image2,q.image3,q.createAt FROM quection as q INNER JOIN user_tbl as u ON q.uid=u.uid ORDER BY q.createAt DESC";
     mysqlConnection.query(sql, function (err1, results) {
         console.log(err1)

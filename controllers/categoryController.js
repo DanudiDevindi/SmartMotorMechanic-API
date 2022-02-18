@@ -36,7 +36,7 @@ const AllCategoryWithCount=(req,res,next)=>{
 
     mysqlConnection.query(sql, function (err1, result) { 
         console.log(err1)
-        console.log(result)
+        console.log(1254,result)
         res.send(
             result
         )

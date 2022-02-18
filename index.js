@@ -25,6 +25,7 @@ const serviceRoutes=require('./routes/service_route');
 const paymnetRouter=require('./routes/payment_route');
 const quectionRoute=require('./routes/quection_route');
 const couponRouter=require('./routes/coupon_route');
+const reportRouter=require('./routes/report_route');
 
 //
 const PORT = 3000;
@@ -62,7 +63,7 @@ app.use(serviceRoutes.routes);
 app.use(paymnetRouter.routes);
 app.use(quectionRoute.routes);
 app.use(couponRouter.routes);
-
+app.use(reportRouter.routes);
 
 //
 //

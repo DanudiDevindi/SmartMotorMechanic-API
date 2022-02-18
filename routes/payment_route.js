@@ -34,13 +34,13 @@ router.get('/admin/paymnetDurationView/:id',viewPaymentDuration);
 router.post('/admin/editPaymentDuration/:id',editPaymentDuration);
 
 //mobile api
-router.get('/getAmountAsDuration/:duration',checkAuth,getPaymnetDuration);
+router.get('/getAmountAsDuration/:duration',getPaymnetDuration);
 
-router.post('/createUserPayment',upload.any(),checkAuth,createUserPayment);
+router.post('/createUserPayment',upload.any(),createUserPayment);
 
 router.get('/paypal',getPayPal);
 
-router.get('/test',checkAuth,testing);
+router.get('/test',testing);
 
 module.exports={
     routes:router

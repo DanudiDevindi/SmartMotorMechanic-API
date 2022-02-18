@@ -27,7 +27,6 @@ const getCoupon = (req, res, next) => {
                 console.log(result_coupon[0].isExpired)
                 if (result_coupon[0].isExpired === "no") { 
                     var sql_user_coupon="SELECT * FROM user_coupon where uid="+uid+" and coupon_id="+result_coupon[0].coupon_id                  
-                    // var sql_user_coupon = "SELECT * FROM user_coupon where uid=" + uid + " and coupon_id=" + result_coupon.coupon_id;
                     mysqlConnection.query(sql_user_coupon, function (err1, result_user_coupon) {
                         console.log(5)
                         console.log(result_user_coupon)
