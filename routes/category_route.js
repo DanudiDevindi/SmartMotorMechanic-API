@@ -30,9 +30,9 @@ router.post('/admin/addCategory',upload.any(), addCategory);
 
 router.get('/admin/category/delete/:cat_id',delete_category);
 
-router.get('/AllCategory',allCate);
+router.get('/AllCategory',checkAuth,allCate);
 
-router.get('/AllCategoryWithCount',AllCategoryWithCount)
+router.get('/AllCategoryWithCount',checkAuth,AllCategoryWithCount)
 
 module.exports={
     routes:router

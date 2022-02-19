@@ -79,7 +79,7 @@ const viewUser = (req, res, next) => {
     const uid = req.params.uid;
     var sql = "SELECT * FROM user_tbl where uid=" + uid;
     mysqlConnection.query(sql, function (err1, result) {
-        console.log(result)
+       
         res.render('viewUser', {
             title: "View User",
             user: result[0],
@@ -97,8 +97,7 @@ const userPaymentList=(req,res,next)=>{
     var uid=req.params.uid;
     var sql = "SELECT * FROM user_payment where uid=" + uid;
     mysqlConnection.query(sql, function (err1, result) {
-        console.log(err1)
-        console.log(result)
+       
         res.render('user_payment_list', {
             title: "View All "+req.params.name+" Payment List",
             userPayments: result,
@@ -112,8 +111,7 @@ const userCouponList=(req,res,next)=>{
     var uid=req.params.uid;
     var sql = "SELECT * FROM user_coupon where uid=" + uid;
     mysqlConnection.query(sql, function (err1, result) {
-        console.log(err1)
-        console.log(result)
+        
         res.render('user_coupon_list', {
             title: "View All "+req.params.name+" Coupon List",
             userCoupons: result,

@@ -22,7 +22,7 @@ const upload=multer({
 });
 
 const createService=(req,res,next)=>{ 
-    console.log(123)
+   
     const objL=JSON.parse(req.body.location);
     const obj = JSON.parse(req.body.data);
     var createAt=obj.createAt
@@ -64,7 +64,7 @@ const createService=(req,res,next)=>{
         now(),'${status}','${isApproved}')`;
 
     mysqlConnection.query(sql, function (err, result) {
-        console.log(err)
+        
         if(err){
             res.send({
                 err:true,
@@ -76,7 +76,7 @@ const createService=(req,res,next)=>{
             var sql_pay=`SELECT * FROM user_payment where uid='${uid}' and isExpired='${isExpired}' and isPaid='${isPaid}'`;
             mysqlConnection.query(sql_pay, function (err, result_pay) {
                 if(err){
-                    console.log(err)
+                   
                     res.send({
                         err:true,
                         message:"Server Error"
@@ -128,23 +128,23 @@ const editService=(req,res,next)=>{
     }
     var sql;
     if(objL==="" && req.files.length<=0){
-        console.log("No Image or location")
+        
         sql=`update service set cat_id='${obj.cat_id}', category='${obj.cat_name}',service_type='${obj.service_type}',
     title='${escape(obj.title)}',description='${escape(obj.description)}' WHERE service_id='${obj.service_id}'`; 
 
     }else if(objL==="" && req.files.length>0){
-        console.log("only image")
+      
         sql=`update service set cat_id='${obj.cat_id}', category='${obj.cat_name}',service_type='${obj.service_type}',
     title='${escape(obj.title)}',description='${escape(obj.description)}',image='${req.files[0].originalname}' WHERE service_id='${obj.service_id}'`; 
 
     }else if(objL!=="" && req.files.length<=0){
-        console.log("only location")
+       
         sql=`update service set cat_id='${obj.cat_id}', category='${obj.cat_name}',service_type='${obj.service_type}',
         title='${escape(obj.title)}',description='${escape(obj.description)}',longitude='${objL.longitude}',
         latitude='${obj.latitude}',address='${obj.address}' WHERE service_id='${obj.service_id}'`;     
 
     }else if(objL!=="" && req.files.length>0){
-        console.log("both image and location")
+       
         sql=`update service set cat_id='${obj.cat_id}', category='${obj.cat_name}',service_type='${obj.service_type}',
         title='${escape(obj.title)}',description='${escape(obj.description)}',longitude='${objL.longitude}',
        latitude='${obj.latitude}',address='${obj.address}',image='${req.files[0].originalname}' WHERE service_id='${obj.service_id}'`; 
@@ -168,7 +168,7 @@ const deleteUserService=async(req,res,next)=>{
     const service_id=req.params.service_id;
     var sql=`DELETE FROM service WHERE service_id='${service_id}'`;
     mysqlConnection.query(sql, function (err, result) {
-        console.log(err)
+        
         if(err){
             res.send({
                 err:true,
@@ -237,22 +237,22 @@ const allServicesWithFilter=(req,res,next)=>{
     }else if(filter.city!=="" && filter.service!=="" && filter.category!==""){       
         sql = `SELECT * FROM service WHERE service_type='${filter.service}' AND city='${filter.city}' AND category='${filter.category}' AND isApproved='${isApproved}'`
     }else if(filter.city!=="" && filter.service!==""){
-        console.log(002)
+      
         sql = `SELECT * FROM service WHERE service_type='${filter.service}' AND city='${filter.city}'`
     }else if(filter.service!=="" && filter.category!==""){
-        console.log(003)
+       
         sql = `SELECT * FROM service WHERE service_type='${filter.service}' AND category='${filter.category}' AND isApproved='${isApproved}'`
     }else if(filter.city!=="" && filter.category!==""){
-        console.log(004)
+        
         sql = `SELECT * FROM service WHERE city='${filter.city}' AND category='${filter.category}' AND isApproved='${isApproved}'`
     }else if(filter.city!==""){
-        console.log(005)
+       
         sql = `SELECT * FROM service WHERE city='${filter.city}'`
     }else if(filter.service!==""){
-        console.log(006)
+        
         sql = `SELECT * FROM service WHERE service_type='${filter.service}' AND isApproved='${isApproved}'`
     }else if(filter.category!==""){
-        console.log(007)
+        
         sql = `SELECT * FROM service WHERE category='${filter.category}' AND isApproved='${isApproved}'`
     }
     
@@ -271,13 +271,8 @@ const allService_types=(req,res,next)=>{
     });
 }
 const createServiceRate=(req,res,next)=>{
-    console.log(req.user_data.uid)
-    console.log("service Id")
-    console.log(req.body.service_id)
     var sql1=`SELECT * FROM service_feedback where service_id='${req.body.service_id}' and uid='${req.user_data.uid}'`;
     mysqlConnection.query(sql1, function (err, result1) {
-        console.log("result1");
-        console.log(result1)
         if(result1.length>0){
             res.send({
                 err:true,
@@ -288,8 +283,7 @@ const createServiceRate=(req,res,next)=>{
             ('${req.user_data.uid}','${req.user_data.name}','${req.body.rate}','${req.body.comment}','${req.body.service_id}',now())`;
         
             mysqlConnection.query(sql, function (err, result) {
-                console.log(err)
-                if(err){
+               if(err){
                     res.send({
                         err:true,
                         msg:"server Error"

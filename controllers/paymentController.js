@@ -9,12 +9,8 @@ const getPaymnetDuration = (req, res, next) => {
     var duration = req.params.duration;    
     var sql_payment = "SELECT * FROM payment where no_of_months=" + duration
     mysqlConnection.query(sql_payment, function (err, result_payment) {
-        console.log(2509)
-        console.log(result_payment)
         if (err) {
-            console.log(30000)
-            console.log(err)
-            res.send({
+           res.send({
                 err: true,
                 message: "Server Error"
             });
@@ -40,15 +36,13 @@ const getPaymnetDuration = (req, res, next) => {
 
 const createUserPayment=(req,res,next)=>{
     const obj=JSON.parse(req.body.data);
-    console.log(obj)
     var createAt=obj.createAt;
     var paidAmount=250
     var sql=`INSERT INTO user_payment(uid,payment_id,payment_method,paid_amount,paidFrom,paidTo,isPaid,isExpired,createAt) VALUES
     ('${req.user_data.uid}','${obj.payment_id}','${obj.payment_method}','${paidAmount}',now(),now(),'no','no',now())`;
 
     mysqlConnection.query(sql, function (err, result) {
-        console.log(err)
-        if(err){
+       if(err){
             res.send({
                 err:true,
                 msg:"server Error"
@@ -99,9 +93,7 @@ const getPayPal=(req,res,next)=>{
         if (error) {
             throw error;
         } else {
-            console.log("Create Payment Response");
-            console.log(payment);
-            res.redirect(payment.links[1].href);
+           res.redirect(payment.links[1].href);
         }
     });
 
@@ -129,12 +121,9 @@ const sucess=(req,res,next)=>{
         payment
     ) {
         if (error) {
-            console.log(error.response);
-            throw error;
+         throw error;
         } else {
-            console.log("Get Payment Response");
-            console.log(JSON.stringify(payment));
-            res.render("success");
+           res.render("success");
         }
     });
 }

@@ -32,9 +32,7 @@ const PORT = 3000;
 
 io.listen(server.listen(PORT, () => console.log("server running on port testing" + PORT)));
 app.io=io.on("connection",function (socket) {
-    console.log("socket connected"+socket.id);
     socket.on("chat msg",msg=>{
-        console.log(msg)
         io.emit("chat msg",msg)
     })
 });
@@ -43,7 +41,6 @@ var cookieParser = require("cookie-parser");
 const checkAuth=require('./middleware/check_auth');
 
 app.use(cookieParser());
-console.log('API Server started on:' +PORT);
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 

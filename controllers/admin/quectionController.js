@@ -145,7 +145,7 @@ const quectionView=(req,res,next)=>{
     const id = req.params.id;
     var sql = "SELECT * FROM quection where qid=" + id;
     mysqlConnection.query(sql, function (err1, result) {
-        console.log(result)
+      
         res.render('viewQuection', {
             title: "View Quection",
             quection: result[0],
@@ -159,8 +159,7 @@ const answeredView=(req,res,next)=>{
     var qid=req.params.qid;
     var sql = "SELECT answer,name FROM answer,user_tbl where qid=" + qid;
     mysqlConnection.query(sql, function (err1, result) {
-        console.log(err1)
-        console.log(result)
+        
         res.render('answersList', {
             title: "View "+req.params.title+" Answer List",
             answers: result,

@@ -21,26 +21,25 @@ const upload=multer({
     }
 });
 
-router.post('/admin/addPaymnetDuration',addPaymnetDuration);
-
 router.get('/admin/paymnetDuration', paymnetDurationView);
 
 router.get('/admin/addPaymnetDurationView',addPaymnetDurationView);
 
-router.get('/admin/paymnetDuration/delete/:id',deletePaymnetDuration);
+router.post('/admin/addPaymnetDuration',addPaymnetDuration);
 
 router.get('/admin/paymnetDurationView/:id',viewPaymentDuration);
 
-router.post('/admin/editPaymentDuration/:id',editPaymentDuration);
+router.post('/admin/editPaymentDuration/:id',editPaymentDuration)
 
-//mobile api
-router.get('/getAmountAsDuration/:duration',getPaymnetDuration);
+router.get('/admin/paymnetDuration/delete/:id',deletePaymnetDuration);
 
-router.post('/createUserPayment',upload.any(),createUserPayment);
+router.get('/getAmountAsDuration/:duration',checkAuth,getPaymnetDuration);
+
+router.post('/createUserPayment',upload.any(),checkAuth,createUserPayment);
 
 router.get('/paypal',getPayPal);
 
-router.get('/test',testing);
+router.get('/test',checkAuth,testing);
 
 module.exports={
     routes:router

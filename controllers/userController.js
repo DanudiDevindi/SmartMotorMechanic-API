@@ -26,14 +26,10 @@ const upload = multer({
 });
 
 const user_register = (req, res, next) => {
-    console.log("user_register1")
-    const now1 = moment().tz("Asia/Colombo").format();
-    console.log(now1)
-
+  const now1 = moment().tz("Asia/Colombo").format();
     var password = bcrypt.hashSync(req.body.password, salt);
     var username = escape(req.body.username);
     var email = req.body.email;
-    console.log(email)
     var contact_no = req.body.contact_no;
     var status = "create";
     var active = 'no'
@@ -47,23 +43,19 @@ const user_register = (req, res, next) => {
 
     var sql1 = `SELECT * FROM user_tbl WHERE email='${email}'`;
     mysqlConnection.query(sql1, (err, rows, fields) => {
-        console.log("user_register2")
-
-        console.log(err)
-        console.log(rows)
+        
         if (rows.length >= 1) {
             res.send({
                 err: true,
                 msg: "Email address already exit"
             })
         } else {
-            console.log("user_register3")
+            
             var sql = `INSERT INTO user_tbl(name,email,password,image,contact_no,position,longitude,latitude,address,city,description,resetToken,expireToken,status,active,createAt) VALUES
             ('${username}','${email}','${password}','emptyUser.jpg','${contact_no}','','${longitude}','${latitude}','','','','${cord}','','${status}','${active}',now())`;
 
             mysqlConnection.query(sql, function (err, result) {
-                console.log("user_register4")
-                console.log(err)
+                
                 if (err) {
                     res.send({
                         err: true,
@@ -95,11 +87,10 @@ const getUserProfile = async (req, res, next) => {
 }
 
 const editUserProfile = async (req, res, next) => {
-    console.log("with Image")
+   
     const obj = JSON.parse(req.body.data);
     const objL = JSON.parse(req.body.location);
-    console.log(objL)
-    var userId = req.user_data.uid;
+   var userId = req.user_data.uid;
     var latitude;
     var longitude;
     var address;
@@ -115,27 +106,27 @@ const editUserProfile = async (req, res, next) => {
 
     var sql;
     if (objL !== "" && req.files.length > 0) {
-        console.log(1111)
+      
         sql = `update user_tbl set name='${obj.username}', contact_no='${obj.contact_no}',position='${obj.position}',
         address='${address}',city='${city}',longitude='${longitude}',latitude='${latitude}',description='${obj.description}',
         image='${req.files[0].originalname}' WHERE uid='${userId}'`;
     } else if (objL === "" && req.files.length > 0) {
-        console.log(2222)
+       
         sql = `update user_tbl set name='${obj.username}', contact_no='${obj.contact_no}',position='${obj.position}',
         description='${obj.description}',image='${req.files[0].originalname}' WHERE uid='${userId}'`;
     } else if (objL !== "" && req.files.length <= 0) {
-        console.log(33333)
+        
         sql = `update user_tbl set name='${obj.username}', contact_no='${obj.contact_no}',position='${obj.position}',
         address='${address}',city='${city}',longitude='${longitude}',latitude='${latitude}',description='${obj.description}'
         WHERE uid='${userId}'`;
     } else if (objL === "" && req.files.length <= 0) {
-        console.log(44444)
+       
         sql = `update user_tbl set name='${obj.username}', contact_no='${obj.contact_no}',position='${obj.position}',
         description='${obj.description}' WHERE uid='${userId}'`;
     }
 
     mysqlConnection.query(sql, function (err, result) {
-        console.log(err)
+        
         if (err) {
             res.send({
                 err: true,
@@ -151,7 +142,7 @@ const editUserProfile = async (req, res, next) => {
 }
 
 const editPassword=async(req,res,next)=>{
-    console.log(req.body)
+    
     var password = bcrypt.hashSync(req.body.new_password, salt);
     var sql1 = `SELECT * FROM user_tbl WHERE uid='${req.user_data.uid}'`;
     mysqlConnection.query(sql1, (err, rows, fields) => {
@@ -184,11 +175,9 @@ const editPassword=async(req,res,next)=>{
 const login = (req, res, next) => {
     var username = req.body.username;
     var password = req.body.password;
-    console.log('username: ' + username)
-    console.log("password : " + password)
-    var sql = `SELECT * FROM user_tbl WHERE email='${username}'`;
+   var sql = `SELECT * FROM user_tbl WHERE email='${username}'`;
     mysqlConnection.query(sql, (error, rows, fields) => {
-        console.log(rows)
+        
         if (rows.length < 1) {
             res.send({
                 err: true,
@@ -204,7 +193,6 @@ const login = (req, res, next) => {
                         uid: rows[0].uid,
                         active:rows[0].active
                     }, 'secret', { expiresIn: 60 * 60 * 60 });
-
                     res.cookie('auth', token);
                     res.send({
                         err: false,
@@ -236,11 +224,10 @@ const techDetails = (req, res, next) => {
 }
 
 const updateAccountActive = async (req, res, next) => {
-    console.log("updateAccountActive")
-    console.log(req.params.email)
+    
     var sql = `update user_tbl set active='yes' WHERE email='${req.params.email}'`;
     mysqlConnection.query(sql, function (err, result) {
-        console.log(err)
+        
         if (err) {
             res.send({
                 err: true,
@@ -342,9 +329,9 @@ const reset_password = async (req, res, next) => {
 }
 
 const send_email = (req, res, next) => {
-    console.log("send")
+
     var data=req.body;
-    console.log(data)
+    
     var transporter = nodemailer.createTransport({
         host: 'localhost',
         port: 3000,
@@ -363,9 +350,7 @@ const send_email = (req, res, next) => {
         html: '<body><p> Hi ' + data.name + '</p><p>You recently registered for smart motor mechanic App. To complete your samrt motor mechanic app registration, please confirm your account with below code.<p><h1>' + req.body.cord + '</h1></body>'
     };
     transporter.sendMail(mailOptions, function (error, info) {
-        console.log("user_register5")
-        console.log(error)
-        console.log(info)
+      
         if (error) {
             // res.json({yo: 'error'});
             res.json({

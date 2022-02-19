@@ -40,8 +40,7 @@ router.get('/admin/service/block/:service_id/:status',blockService);
 
 router.get('/admin/service/approve/:service_id/:approve',approveService);
 
-
-//service type
+// service type
 router.get('/admin/service_types',serviceTypesView);
 
 router.get('/admin/addServiceTypeView',addServiceTypeView);
@@ -50,29 +49,30 @@ router.post('/admin/addService_type',addServiceType);
 
 router.get('/admin/service_type/delete/:service_type_id',deleteServiceType);
 
+//user service
 
-// user services 
-router.post('/createService',upload.any(),createService);
+router.post('/createService',upload.any(),checkAuth,createService);
 
-router.get('/user_service',userServices);
+router.post('/edit_service',upload.any(),checkAuth,editService);
 
-router.post('/edit_service',upload.any(),editService);
+router.get('/user_service',checkAuth,userServices);
 
-router.get('/deleteUserService/:service_id',deleteUserService);
+router.get('/deleteUserService/:service_id',checkAuth,deleteUserService);
 
-router.get('/allServices',allServices);
+router.get('/allServices',checkAuth,allServices);
 
-router.get('/allServices/:vehicle/:page',allServicesWithPagination);
+router.get('/AllService_types',checkAuth,allService_types);
 
-router.post('/allServicesWithFilter',allServicesWithFilter);
+router.get('/allServices/:vehicle/:page',checkAuth,allServicesWithPagination);
 
-router.get('/AllService_types',allService_types);
+router.post('/allServicesWithFilter',checkAuth,allServicesWithFilter);
 
-router.post('/createServiceRate',createServiceRate);
+router.post('/createServiceRate',checkAuth,createServiceRate);
 
-router.get('/getRateSummery/:service_id',getRateSummery);
+router.get('/getRateSummery/:service_id',checkAuth,getRateSummery);
 
-router.get('/getServiceRate/:service_id',getServiceRate)
+router.get('/getServiceRate/:service_id',checkAuth,getServiceRate)
+
 
 module.exports={
     routes:router

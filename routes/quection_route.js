@@ -24,32 +24,31 @@ router.get('/admin/quections', allquectionView);
 
 router.get('/admin/addQuectionView',addQuectionView);
 
-router.post('/admin/addQuection',upload.any(),addQuection);
+router.post('/admin/addQuection',upload.any(),addQuection)
 
 router.get('/admin/quection/delete/:qid',deleteQuection);
+
+router.get('/admin/quectionView/:id',quectionView);
+
+router.get('/admin/answersView/:qid/:title',answeredView)
 
 router.get('/admin/quection/block/:qid/:status',blockQuection);
 
 router.get('/admin/quection/approve/:qid',approveQuection);
 
-router.get('/admin/quectionView/:id',quectionView);
+router.post('/createQuection',upload.any(),checkAuth,createQuection);
 
-router.get('/admin/answersView/:qid/:title',answeredView);
+router.get('/allQuections',checkAuth,allQuections); 
 
+router.get('/allAnswers/:qid',checkAuth,allAnswers)
 
-router.post('/createQuection',upload.any(),createQuection);
+router.post('/addAnswer',checkAuth,addAnswer);
 
-router.get('/allQuections',allQuections);
+router.get('/user_posts',checkAuth,user_posts);
 
-router.get('/allAnswers/:qid',allAnswers);
+router.post('/edit_post',upload.any(),checkAuth,edit_post);
 
-router.post('/addAnswer',addAnswer);
-
-router.get('/user_posts',user_posts);
-
-router.post('/edit_post',upload.any(),edit_post);
-
-router.get('/deleteUserPost/:qid',deleteUserPost);
+router.get('/deleteUserPost/:qid',checkAuth,deleteUserPost);
 
 module.exports={
     routes:router

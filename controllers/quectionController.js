@@ -5,14 +5,15 @@ var escape = require('sql-escape');
 
 
 const createQuection = (req, res, next) => {
-    console.log("createQuection1")
-    console.log(req.files)
+ 
     const obj = JSON.parse(req.body.data);
     const objL = JSON.parse(req.body.location);
-    var uid = req.user_data.uid;
-    console.log("uid")
-    console.log(uid)
-    var user_name = escape(req.user_data.name);
+ 
+   
+    // var uid = req.user_data.uid;
+    var uid=6;
+    // var user_name = escape(req.user_data.name);
+    var user_name= "Thisara Maduranga";
     var cat_id = obj.cat_id;
     var category = obj.cat_name;
     var title = escape(obj.title);
@@ -41,7 +42,7 @@ const createQuection = (req, res, next) => {
 
     mysqlConnection.query(sql, function (err, result) {
         if (err) {
-            res.send({
+           res.send({
                 err: true,
                 msg: err
             })
@@ -82,22 +83,17 @@ const time_calculate = (firstTime) => {
 
 }
 const allQuections = async (req, res, next) => {
-    console.log(852)
+   
     var postData = [];
     var sql = "SELECT q.qid,u.name,u.contact_no,q.category,q.title,q.quection,q.longitude,q.latitude,q.address,q.image,q.image2,q.image3,q.createAt FROM quection as q INNER JOIN user_tbl as u ON q.uid=u.uid ORDER BY q.createAt DESC";
     mysqlConnection.query(sql, function (err1, results) {
-        console.log(err1)
-        console.log(852)
-        console.log(results)
-
         results.forEach(async (result) => {
              await postData.push({
                  timeDiff:time_calculate(result.createAt),
                  quec:result
              })
         })
-        console.log(postData)
-        return res.status(200).json(postData);
+       return res.status(200).json(postData);
     });
 
 }
@@ -149,31 +145,27 @@ const user_posts = (req, res, next) => {
 }
 
 const edit_post = (req, res, next) => {
-    console.log("edit post")
-    const obj = JSON.parse(req.body.data);
-    // console.log(obj)
+   const obj = JSON.parse(req.body.data);
+  
     const objL = JSON.parse(req.body.location);
-    console.log("ObjL")
+ 
     
     if(objL==="" && req.files.length<=0){
-        console.log("No Image or location")
-        sql = `update quection set cat_id='${obj.cat_id}', category='${obj.cat_name}',title='${escape(obj.title)}',
+       sql = `update quection set cat_id='${obj.cat_id}', category='${obj.cat_name}',title='${escape(obj.title)}',
     quection='${escape(obj.quection)}' WHERE qid='${obj.qid}'`;
 
     }else if(objL==="" && req.files.length>0){
-        console.log("only image")
-        sql = `update quection set cat_id='${obj.cat_id}', category='${obj.cat_name}',title='${escape(obj.title)}',
+       sql = `update quection set cat_id='${obj.cat_id}', category='${obj.cat_name}',title='${escape(obj.title)}',
     quection='${escape(obj.quection)}',image='${escape(req.files[0].originalname)}' WHERE qid='${obj.qid}'`;
 
     }else if(objL!=="" && req.files.length<=0){
-        console.log("only location")
+        
         sql = `update quection set cat_id='${obj.cat_id}', category='${obj.cat_name}',title='${escape(obj.title)}',
     quection='${escape(obj.quection)}',longitude='${objL.longitude}',
     latitude='${objL.latitude}', address='${objL.address}' WHERE qid='${obj.qid}'`;
 
     }else if(objL!=="" && req.files.length>0){
-        console.log("both image and location")
-        console.log(objL)
+       
         sql = `update quection set cat_id='${obj.cat_id}', category='${obj.cat_name}',title='${escape(obj.title)}',
     quection='${escape(obj.quection)}',image='${escape(req.files[0].originalname)}',longitude='${objL.longitude}',
     latitude='${objL.latitude}', address='${objL.address}' WHERE qid='${obj.qid}'`;
@@ -182,7 +174,7 @@ const edit_post = (req, res, next) => {
 
     
     mysqlConnection.query(sql, function (err, result) {
-        console.log(err)
+        
         if (err) {
             res.send({
                 err: true,
@@ -198,10 +190,10 @@ const edit_post = (req, res, next) => {
 }
 
 const deleteUserPost=(req,res,next)=>{
-    console.log(req.params.qid)
+  
     var sql=`DELETE FROM quection WHERE qid='${req.params.qid}'`;
     mysqlConnection.query(sql, function (err, result) {
-        console.log(err)
+        
         if(err){
             res.send({
                 err:true,

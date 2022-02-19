@@ -101,11 +101,11 @@ const addService = (req, res, next) => {
     var isPaid = false;
     var isApproved = false;
     var image = req.files[0].originalname;
-    console.log(image)
+   
 
     var sql = `INSERT INTO service(uid,user_name,cat_id,category,title,description,service_type,price,image,longitude,latitude,createAt,status,isPaid,isApproved) VALUES
     ('${uid}','${user_name}','${cat_id}','${category}','${title}','${description}','${service_type}','${price}','${image}','${longitude}','${latitude}','${createAt}','${status}','${isPaid}','${isApproved}')`;
-
+   
     mysqlConnection.query(sql, function (err, result) {
         if (err) {
             setTimeout(function () {
@@ -131,15 +131,14 @@ const addService = (req, res, next) => {
     });
 }
 const addServiceType = (req, res, next) => {
-    console.log("addServiceType1")
+   
     var type = req.body.type;
     var price_set_as = req.body.price_set_as;
-    console.log("type " + type + " priceSet " + price_set_as)
+  
     // var sqlAll = `SELECT * FROM service_type WHERE type='${type}' and price_set_as='${price_set_as}'`;
     var sqlAll = `SELECT * FROM service_type WHERE type='${type}'`;
     mysqlConnection.query(sqlAll, function (err1, result) {
-        console.log("addServiceType2")
-        console.log(err1)
+       
         if (result.length >= 1) {
             res.render('addServiceType', {
                 title: "Add Service Type",
@@ -149,8 +148,7 @@ const addServiceType = (req, res, next) => {
         } else {
             var sql = `INSERT INTO service_type(type,price_set_as,createAt) VALUES ('${type}','${price_set_as}',NOW())`;
             mysqlConnection.query(sql, function (err, result) {
-                console.log("addServiceType3")
-                console.log(err)
+                
                 if (err) {
                     res.render('addServiceType', {
                         title: "Add Service Type",
@@ -170,7 +168,7 @@ const addServiceType = (req, res, next) => {
 }
 const editService = async (req, res, next) => {
     const obj = JSON.parse(req.body.data);
-    console.log(obj)
+    
     var sql = `update user_tbl set name='${obj.username}', contact_no='${obj.contact_no}',password='${obj.password}',
     image='${req.files[0].originalname}' WHERE uid='${1}'`;
     mysqlConnection.query(sql, function (err, result) {
@@ -192,7 +190,7 @@ const serviceView = (req, res, next) => {
     const id = req.params.id;
     var sql = "SELECT * FROM service where service_id=" + id;
     mysqlConnection.query(sql, function (err1, result) {
-        console.log(result)
+      
         res.render('viewService', {
             title: "View Service",
             service: result[0],
@@ -232,7 +230,7 @@ const blockService = (req, res, next) => {
 const approveService = (req, res, next) => {
     const service_id = req.params.service_id;
     var isApproved=req.params.approve;
-    console.log(isApproved)
+    
     var serviceA;
     if (isApproved=== "yes") {
         serviceA = "no"
@@ -276,7 +274,7 @@ const viewServiceType=(req,res,next)=>{
     const id = req.params.id;
     var sql = "SELECT * FROM service_type where service_type_id=" + id;
     mysqlConnection.query(sql, function (err1, result) {
-        console.log(result)
+       
         res.render('viewServiceType', {
             title: "View Service Type",
             service_type: result[0],
@@ -286,12 +284,10 @@ const viewServiceType=(req,res,next)=>{
     });
 }
 const editServiceType=(req,res,next)=>{
-    console.log(req.params.id)
+  
     var sql = `SELECT * FROM service_type where service_type_id='${req.params.id}'`;
     mysqlConnection.query(sql, function (err, result) {
-        console.log(333)
-
-        console.log(err)
+       
         var sql = `update service_type set price_set_as='${req.body.price_set_as}' WHERE service_type_id='${req.params.id}'`;
         mysqlConnection.query(sql, function (err1, result1) {
             if(err1){
