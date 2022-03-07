@@ -10,10 +10,10 @@ const createQuection = (req, res, next) => {
     const objL = JSON.parse(req.body.location);
  
    
-    // var uid = req.user_data.uid;
-    var uid=6;
-    // var user_name = escape(req.user_data.name);
-    var user_name= "Thisara Maduranga";
+    var uid = req.user_data.uid;
+    // var uid=3;
+    var user_name = escape(req.user_data.name);
+    // var user_name= "Danudi Devindi";
     var cat_id = obj.cat_id;
     var category = obj.cat_name;
     var title = escape(obj.title);
